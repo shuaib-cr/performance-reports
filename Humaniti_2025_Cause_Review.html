@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Humaniti 2025 Cause Review — Pakistan · Water · Gaza · Masjid Fund</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:        #0f0f0f;
+  --paper:      #f4efe5;
+  --cream:      #ede7d8;
+  --rule:       #cdc5b5;
+  --muted:      #6b6459;
+  --gold:       #c49a3c;
+  --gold-lt:    #f5e8c0;
+  --teal:       #1a6060;
+  --teal-lt:    #ddf0ee;
+  --rust:       #b84c2b;
+  --rust-lt:    #fbeee9;
+  --indigo:     #3a4a8c;
+  --indigo-lt:  #eaedfa;
+  --green:      #2d7a3a;
+  --green-lt:   #e4f4e7;
+  --purple:     #6b3a8c;
+  --purple-lt:  #f3eafa;
+  --brown:      #5a3e00;
+
+  /* Tab colours */
+  --c-pak:   #b8860b;   --c-pak-lt: #fdf3dd;  --c-pak-bg: #4a3200;
+  --c-water: #1a6060;   --c-water-lt:#ddf0ee; --c-water-bg:#0a3030;
+  --c-gaza:  #3a4a8c;   --c-gaza-lt: #eaedfa; --c-gaza-bg: #1a2456;
+  --c-mf:    #2d7a3a;   --c-mf-lt:  #e4f4e7;  --c-mf-bg:  #0d3018;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Mono',monospace;background:var(--paper);color:var(--ink);font-size:12px;line-height:1.65;}
+
+/* ─── COVER ────────────────────────────────────────────── */
+.cover{background:var(--ink);color:var(--paper);padding:72px 80px 60px;position:relative;overflow:hidden;}
+.cover::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-55deg,transparent,transparent 60px,rgba(196,154,60,.05) 60px,rgba(196,154,60,.05) 61px),repeating-linear-gradient(35deg,transparent,transparent 80px,rgba(26,96,96,.06) 80px,rgba(26,96,96,.06) 81px);}
+.cover-eyebrow{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:28px;position:relative;}
+.cover-title{font-family:'Playfair Display',serif;font-size:clamp(34px,5vw,58px);font-weight:900;line-height:1.02;color:var(--paper);margin-bottom:8px;position:relative;}
+.cover-sub{font-family:'Fraunces',serif;font-style:italic;font-size:17px;color:var(--gold-lt);margin-bottom:44px;}
+.cover-tabs{display:flex;gap:20px;flex-wrap:wrap;position:relative;}
+.ctab{border:1px solid rgba(196,154,60,.3);padding:14px 22px;cursor:pointer;transition:background .15s;}
+.ctab:hover{background:rgba(196,154,60,.1);}
+.ctab-label{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;}
+.ctab-name{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;}
+.ctab-sub{font-size:10px;color:rgba(244,239,229,.45);margin-top:2px;}
+
+/* ─── TAB NAV ───────────────────────────────────────────── */
+.tab-nav{position:sticky;top:0;z-index:100;background:var(--ink);display:flex;border-bottom:2px solid rgba(255,255,255,.08);}
+.tb{padding:14px 28px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(244,239,229,.4);cursor:pointer;border:none;background:none;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .15s;white-space:nowrap;}
+.tb:hover{color:var(--paper);}
+.tb.ap{color:#f5d87a;border-bottom-color:var(--c-pak);}
+.tb.aw{color:#7fd4d4;border-bottom-color:var(--c-water);}
+.tb.ag{color:#a0b0f0;border-bottom-color:var(--c-gaza);}
+.tb.am{color:#90d4a0;border-bottom-color:var(--c-mf);}
+
+/* ─── PANELS ────────────────────────────────────────────── */
+.panel{display:none;}
+.panel.active{display:block;}
+
+/* ─── TAB HEADER ────────────────────────────────────────── */
+.th{padding:40px 52px 32px;position:relative;overflow:hidden;}
+.th::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 40px,rgba(255,255,255,.04) 40px,rgba(255,255,255,.04) 41px);}
+.th-eye{font-size:9px;letter-spacing:.28em;text-transform:uppercase;opacity:.6;margin-bottom:10px;position:relative;}
+.th-title{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,46px);font-weight:900;line-height:1.05;position:relative;margin-bottom:6px;color:var(--paper);}
+.th-sub{font-family:'Fraunces',serif;font-style:italic;font-size:14px;opacity:.75;position:relative;color:var(--paper);}
+.th.pak{background:var(--c-pak-bg);}
+.th.water{background:var(--c-water-bg);}
+.th.gaza{background:var(--c-gaza-bg);}
+.th.mf{background:var(--c-mf-bg);}
+
+/* ─── WRAP ──────────────────────────────────────────────── */
+.wrap{max-width:1160px;margin:0 auto;padding:0 52px 88px;}
+
+/* ─── ANSWER BANNER ─────────────────────────────────────── */
+.ans-banner{padding:20px 26px;margin-top:32px;border:1px solid;}
+.ans-banner.pak{background:var(--c-pak-lt);border-color:var(--c-pak);}
+.ans-banner.water{background:var(--teal-lt);border-color:var(--teal);}
+.ans-banner.gaza{background:var(--indigo-lt);border-color:var(--indigo);}
+.ans-banner.mf{background:var(--green-lt);border-color:var(--green);}
+.ans-eye{font-size:9px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:12px;}
+.ans-eye.pak{color:var(--c-pak);}
+.ans-eye.water{color:var(--teal);}
+.ans-eye.gaza{color:var(--indigo);}
+.ans-eye.mf{color:var(--green);}
+.ans-grid{display:grid;gap:24px;}
+
+/* ─── SECTION ───────────────────────────────────────────── */
+.section{margin-top:60px;border-top:2.5px solid var(--ink);padding-top:20px;}
+.sec-label{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.sec-title{font-family:'Playfair Display',serif;font-size:27px;font-weight:700;margin-bottom:18px;}
+.sec-intro{font-family:'Fraunces',serif;font-style:italic;font-size:13.5px;color:var(--muted);max-width:700px;line-height:1.75;margin-bottom:26px;}
+
+/* ─── KPI STRIP ─────────────────────────────────────────── */
+.ks{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:28px;}
+.kpi{background:var(--paper);padding:17px 15px;}
+.kpi.hi{background:var(--ink);color:var(--paper);}
+.kpi.hi .kl{color:var(--gold);}
+.kpi.hi .kd{color:rgba(244,239,229,.5);}
+.kpi.pak{background:var(--c-pak-bg);color:var(--paper);}
+.kpi.pak .kl{color:#f5d87a;}
+.kpi.pak .kd{color:rgba(244,239,229,.5);}
+.kpi.water{background:var(--c-water-bg);color:var(--paper);}
+.kpi.water .kl{color:#a0e8e8;}
+.kpi.water .kd{color:rgba(244,239,229,.5);}
+.kpi.gaza{background:var(--c-gaza-bg);color:var(--paper);}
+.kpi.gaza .kl{color:#b0bcf0;}
+.kpi.gaza .kd{color:rgba(244,239,229,.5);}
+.kpi.mf{background:var(--c-mf-bg);color:var(--paper);}
+.kpi.mf .kl{color:#a0d4a8;}
+.kpi.mf .kd{color:rgba(244,239,229,.5);}
+.kpi.gold{background:var(--gold-lt);}
+.kl{font-size:9px;letter-spacing:.17em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.kv{font-family:'Playfair Display',serif;font-size:21px;font-weight:700;line-height:1;margin-bottom:3px;}
+.kd{font-size:10px;color:var(--muted);}
+.kd.pos{color:var(--green);font-weight:600;}
+.kd.neg{color:var(--rust);font-weight:600;}
+
+/* ─── TABLE ─────────────────────────────────────────────── */
+table{width:100%;border-collapse:collapse;font-size:11px;}
+thead{border-bottom:2px solid var(--ink);}
+th{text-align:left;padding:9px 11px 7px;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:500;}
+th.r,td.r{text-align:right;}
+td{padding:9px 11px;border-bottom:1px solid var(--rule);vertical-align:middle;}
+tr:last-child td{border-bottom:2px solid var(--ink);}
+tr.acc td{background:var(--gold-lt);}
+tr.acc-water td{background:var(--teal-lt);}
+tr.acc-gaza td{background:var(--indigo-lt);}
+tr.acc-mf td{background:var(--green-lt);}
+tr.sub td{background:var(--cream);font-size:10.5px;color:var(--muted);}
+tr.sub td:first-child{padding-left:26px;}
+tr.total td{background:var(--ink);color:var(--paper);font-weight:700;}
+tr.group td{background:var(--cream);font-family:'Playfair Display',serif;font-weight:700;font-size:12px;}
+.badge{display:inline-block;padding:2px 7px;font-size:9px;letter-spacing:.07em;text-transform:uppercase;font-weight:600;}
+.b-teal{background:var(--teal-lt);color:var(--teal);}
+.b-rust{background:var(--rust-lt);color:var(--rust);}
+.b-gold{background:var(--gold-lt);color:#7a5c10;}
+.b-green{background:var(--green-lt);color:var(--green);}
+.b-indigo{background:var(--indigo-lt);color:var(--indigo);}
+.b-purple{background:var(--purple-lt);color:var(--purple);}
+.b-ink{background:var(--ink);color:var(--paper);}
+.b-pak{background:var(--c-pak-lt);color:var(--c-pak-bg);}
+
+/* ─── BARS ──────────────────────────────────────────────── */
+.bc{display:flex;flex-direction:column;gap:8px;}
+.br{display:flex;align-items:center;gap:9px;}
+.bl{flex-shrink:0;font-size:10.5px;color:var(--muted);text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.bl.w180{width:180px;}
+.bl.w220{width:220px;}
+.bl.w260{width:260px;}
+.bt{flex:1;height:21px;background:var(--cream);overflow:hidden;}
+.bf{height:100%;display:flex;align-items:center;padding:0 7px;}
+.bf span{font-size:10px;color:white;font-weight:500;white-space:nowrap;overflow:hidden;}
+.ba{flex-shrink:0;width:90px;font-size:10px;color:var(--muted);text-align:right;}
+.bf-teal{background:var(--teal);}
+.bf-gold{background:var(--gold);}
+.bf-rust{background:var(--rust);}
+.bf-indigo{background:var(--indigo);}
+.bf-green{background:var(--green);}
+.bf-purple{background:var(--purple);}
+.bf-gray{background:#888;}
+.bf-pak{background:var(--c-pak);}
+.bf-water{background:var(--c-water);}
+.bf-gaza{background:var(--c-gaza);}
+.bf-mf{background:var(--c-mf);}
+
+/* ─── CALLOUT ───────────────────────────────────────────── */
+.co{border-left:3px solid var(--gold);background:var(--gold-lt);padding:14px 20px;margin:18px 0;font-family:'Fraunces',serif;font-style:italic;font-size:13px;line-height:1.75;color:#4a3c10;}
+.co.teal{border-color:var(--teal);background:var(--teal-lt);color:#0a2e2e;}
+.co.rust{border-color:var(--rust);background:var(--rust-lt);color:#5a1800;}
+.co.indigo{border-color:var(--indigo);background:var(--indigo-lt);color:#1a2050;}
+.co.green{border-color:var(--green);background:var(--green-lt);color:#0d3015;}
+.co.purple{border-color:var(--purple);background:var(--purple-lt);color:#2e0a48;}
+
+/* ─── TWO COL ───────────────────────────────────────────── */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:36px;}
+@media(max-width:800px){.two{grid-template-columns:1fr;}}
+
+/* ─── FLIST ─────────────────────────────────────────────── */
+.fl{list-style:none;display:flex;flex-direction:column;gap:12px;}
+.fl li{display:flex;gap:11px;align-items:flex-start;font-size:11.5px;line-height:1.65;}
+.fn{flex-shrink:0;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;margin-top:1px;color:var(--paper);}
+.fn.teal{background:var(--teal);}
+.fn.gold{background:var(--gold);color:var(--ink);}
+.fn.rust{background:var(--rust);}
+.fn.indigo{background:var(--indigo);}
+.fn.green{background:var(--green);}
+
+/* ─── HELPERS ───────────────────────────────────────────── */
+hr.div{border:none;border-top:1px solid var(--rule);margin:22px 0;}
+.fn-note{font-size:9.5px;color:var(--muted);margin-top:8px;line-height:1.5;}
+.footer{margin-top:60px;border-top:1px solid var(--rule);padding-top:18px;display:flex;justify-content:space-between;font-size:10px;color:var(--muted);}
+.stat-row{display:grid;gap:16px;margin-bottom:24px;}
+.stat{border:1px solid var(--rule);padding:16px 18px;}
+.stat-l{font-size:9px;letter-spacing:.17em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.stat-v{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;line-height:1;}
+.stat-d{font-size:10px;color:var(--muted);margin-top:3px;}
+.divider-label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin:20px 0 12px;}
+.section-sub{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin:28px 0 14px;border-bottom:1px solid var(--rule);padding-bottom:8px;}
+</style>
+</head>
+<body>
+
+<!-- ═══ COVER ═══════════════════════════════════════════════ -->
+<div class="cover">
+  <p class="cover-eyebrow">Clearoute Marketing Intelligence · 2025 Cause Review</p>
+  <h1 class="cover-title">Humaniti 2025<br>Cause Review</h1>
+  <p class="cover-sub">Pakistan · Water · Muslimi Gaza · Muslimi Masjid Fund — Full Year Analysis</p>
+  <div class="cover-tabs">
+    <div class="ctab" onclick="go('pak')">
+      <div class="ctab-label">Tab 1</div>
+      <div class="ctab-name" style="color:#f5d87a">Pakistan</div>
+      <div class="ctab-sub">14 campaigns · $104,828</div>
+    </div>
+    <div class="ctab" onclick="go('water')">
+      <div class="ctab-label">Tab 2</div>
+      <div class="ctab-name" style="color:#7fd4d4">Water</div>
+      <div class="ctab-sub">17 campaigns · $6,271,081</div>
+    </div>
+    <div class="ctab" onclick="go('gaza')">
+      <div class="ctab-label">Tab 3</div>
+      <div class="ctab-name" style="color:#a0b0f0">Muslimi — Gaza</div>
+      <div class="ctab-sub">1 campaign · $600,861</div>
+    </div>
+    <div class="ctab" onclick="go('mf')">
+      <div class="ctab-label">Tab 4</div>
+      <div class="ctab-name" style="color:#90d4a0">Muslimi — Masjid Fund</div>
+      <div class="ctab-sub">16 campaigns · $1,947,288</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TAB NAV ══════════════════════════════════════════════ -->
+<div class="tab-nav">
+  <button class="tb ap" id="btn-pak"   onclick="go('pak')">01 · Pakistan</button>
+  <button class="tb"    id="btn-water" onclick="go('water')">02 · Water</button>
+  <button class="tb"    id="btn-gaza"  onclick="go('gaza')">03 · Muslimi — Gaza</button>
+  <button class="tb"    id="btn-mf"    onclick="go('mf')">04 · Muslimi — Masjid Fund</button>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     TAB 1 — PAKISTAN
+═══════════════════════════════════════════════════════════ -->
+<div class="panel active" id="panel-pak">
+  <div class="th pak">
+    <p class="th-eye">Tab 1 · Pakistan Fundraising · Humaniti Platform</p>
+    <h2 class="th-title">Pakistan</h2>
+    <p class="th-sub">14 campaigns · Jan 01 – Dec 31 2025 · Campaign code: humaniti</p>
+  </div>
+  <div class="wrap">
+
+    <!-- Q1 DIRECT ANSWER -->
+    <div class="ans-banner pak" style="margin-top:32px;">
+      <p class="ans-eye pak">Direct Answer — Question 1: Pakistan Fundraising Breakdown 2025</p>
+      <div class="ans-grid" style="grid-template-columns:repeat(3,1fr);">
+        <div>
+          <div style="font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--c-pak);margin-bottom:5px;">Total Raised — Pakistan Campaigns</div>
+          <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;">$104,828</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:3px;">14 humaniti-coded campaigns</div>
+        </div>
+        <div>
+          <div style="font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--c-pak);margin-bottom:5px;">Pakistan + Water (Combined)</div>
+          <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;">$6,375,909</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:3px;">Pakistan $104,828 + Water $6,271,081</div>
+        </div>
+        <div style="border-left:2px solid rgba(184,134,11,.3);padding-left:20px;">
+          <div style="font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--c-pak);margin-bottom:5px;">Important Note on Water</div>
+          <div style="font-size:12px;line-height:1.6;color:var(--ink);">There is <strong>no water-specific distinction</strong> within Pakistan campaigns. Water programmes are tracked globally (see Tab 2) and are not segmented by recipient country within the Humaniti campaign structure. Pakistan water programmes cannot be isolated from global water fundraising.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 1 — OVERVIEW -->
+    <div class="section">
+      <p class="sec-label">Section 1</p>
+      <h2 class="sec-title">Pakistan Programme Overview</h2>
+      <p class="sec-intro">Pakistan is Humaniti's smallest primary cause at $104,828 across 14 campaigns in 2025. Despite modest volume, the programme runs a remarkably high 57.4% recurring rate — driven by a loyal core of 220 monthly givers. Email and Google are the dominant channels.</p>
+
+      <div class="ks">
+        <div class="kpi hi"><div class="kl">Total Raised</div><div class="kv">$104,828</div><div class="kd">14 campaigns</div></div>
+        <div class="kpi hi"><div class="kl">One-Time Revenue</div><div class="kv">$44,707</div><div class="kd">42.6% of total</div></div>
+        <div class="kpi pak"><div class="kl">Recurring Revenue</div><div class="kv">$60,121</div><div class="kd">57.4% recurring rate</div></div>
+        <div class="kpi pak"><div class="kl">MRR (Excl. Daily)</div><div class="kv">$59,567</div><div class="kd">ARR $714,803</div></div>
+        <div class="kpi"><div class="kl">Transactions</div><div class="kv">2,484</div><div class="kd">Avg $42.20 / txn</div></div>
+        <div class="kpi"><div class="kl">Unique Donors</div><div class="kv">649</div><div class="kd">New: 378 (58.2%)</div></div>
+        <div class="kpi"><div class="kl">Returning Donors</div><div class="kv">271</div><div class="kd">41.8% returning</div></div>
+        <div class="kpi"><div class="kl">Recurring Donors</div><div class="kv">220</div><div class="kd">33.9% of all donors</div></div>
+      </div>
+
+      <div class="co">
+        <strong>Pakistan's 57.4% recurring rate is the joint-highest in this report</strong> (alongside Masjid Fund core), yet the programme is the smallest by gross revenue. This paradox indicates a deeply committed, email-nurtured donor base that is not being actively grown through paid acquisition. The opportunity is clear: the retention model works — scaling acquisition could be high-ROI.
+      </div>
+    </div>
+
+    <!-- SECTION 2 — CAMPAIGN TABLE -->
+    <div class="section">
+      <p class="sec-label">Section 2</p>
+      <h2 class="sec-title">Campaign-Level Breakdown</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Campaign</th>
+            <th class="r">Total Raised</th>
+            <th class="r">One-Time</th>
+            <th class="r">Recurring</th>
+            <th class="r">Recur %</th>
+            <th class="r">MRR</th>
+            <th class="r">Recur Donors</th>
+            <th class="r">New Donors</th>
+            <th>Top Channel</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="acc"><td><strong>pakistan</strong> <span class="badge b-pak">email-driven</span></td><td class="r">$21,667</td><td class="r">$4,054</td><td class="r"><strong>$17,612</strong></td><td class="r">81.3%</td><td class="r">$17,612</td><td class="r">75</td><td class="r">18 (19.4%)</td><td>Email 55.2%</td></tr>
+          <tr><td>humaniti - pakistan individuals relief</td><td class="r">$20,930</td><td class="r">$18,280</td><td class="r">$2,650</td><td class="r">12.7%</td><td class="r">$2,447</td><td class="r">23</td><td class="r">269 (78.7%)</td><td>Google 60.5%</td></tr>
+          <tr class="acc"><td><strong>humaniti - pakistan</strong> <span class="badge b-pak">99.5% recurring</span></td><td class="r">$14,814</td><td class="r">$70</td><td class="r"><strong>$14,744</strong></td><td class="r">99.5%</td><td class="r">$14,554</td><td class="r">57</td><td class="r">4 (6.8%)</td><td>Email 69.3%</td></tr>
+          <tr><td>usa | pakistan global site</td><td class="r">$14,783</td><td class="r">$12,153</td><td class="r">$2,630</td><td class="r">17.8%</td><td class="r">$2,630</td><td class="r">4</td><td class="r">34 (79.1%)</td><td>Google 74.4%</td></tr>
+          <tr class="acc"><td><strong>ca | donate directly</strong> <span class="badge b-pak">86.4% recurring</span></td><td class="r">$13,431</td><td class="r">$1,828</td><td class="r"><strong>$11,604</strong></td><td class="r">86.4%</td><td class="r">$11,604</td><td class="r">6</td><td class="r">10 (66.7%)</td><td>Other 100%</td></tr>
+          <tr><td>saf: malnutrition <span class="badge b-rust">100% recurring</span></td><td class="r">$5,311</td><td class="r">—</td><td class="r">$5,311</td><td class="r">100.0%</td><td class="r">$5,305</td><td class="r">21</td><td class="r">0 (0%)</td><td>Meta 97.4%</td></tr>
+          <tr><td>pakistan upsell</td><td class="r">$4,137</td><td class="r">$294</td><td class="r">$3,843</td><td class="r">92.9%</td><td class="r">$3,821</td><td class="r">26</td><td class="r">9 (27.3%)</td><td>Google 68.6%</td></tr>
+          <tr><td>ca | pakistan global site</td><td class="r">$3,680</td><td class="r">$3,463</td><td class="r">$218</td><td class="r">5.9%</td><td class="r">$84</td><td class="r">1</td><td class="r">17 (89.5%)</td><td>Google 32.5%</td></tr>
+          <tr><td>ca | pakistan flood relief (appna)</td><td class="r">$2,893</td><td class="r">$2,893</td><td class="r">—</td><td class="r">0.0%</td><td class="r">—</td><td class="r">0</td><td class="r">8 (88.9%)</td><td>Other 100%</td></tr>
+          <tr><td>pakistan global site</td><td class="r">$1,870</td><td class="r">$1,252</td><td class="r">$618</td><td class="r">33.0%</td><td class="r">$618</td><td class="r">2</td><td class="r">5 (71.4%)</td><td>Google 33.0%</td></tr>
+          <tr><td>ca | appna - orphans (pakistan)</td><td class="r">$653</td><td class="r">$219</td><td class="r">$434</td><td class="r">66.5%</td><td class="r">$470</td><td class="r">1</td><td class="r">2 (100%)</td><td>Other 100%</td></tr>
+          <tr><td>humaniti - pakistan additional</td><td class="r">$328</td><td class="r">—</td><td class="r">$328</td><td class="r">100.0%</td><td class="r">$293</td><td class="r">3</td><td class="r">0</td><td>Meta 84.8%</td></tr>
+          <tr><td>deaf reach: education</td><td class="r">$185</td><td class="r">$56</td><td class="r">$129</td><td class="r">69.7%</td><td class="r">$129</td><td class="r">1</td><td class="r">1</td><td>Email 30.3%</td></tr>
+          <tr><td>humaniti - pakistan arabic</td><td class="r">$146</td><td class="r">$146</td><td class="r">—</td><td class="r">0.0%</td><td class="r">—</td><td class="r">0</td><td class="r">1</td><td>Other 100%</td></tr>
+          <tr class="total"><td>TOTAL — PAKISTAN</td><td class="r">$104,828</td><td class="r">$44,707</td><td class="r">$60,121</td><td class="r">57.4%</td><td class="r">$59,567</td><td class="r">220</td><td class="r">378 (58.2%)</td><td>—</td></tr>
+        </tbody>
+      </table>
+      <p class="fn-note">Highlighted rows are campaigns where recurring revenue exceeds 75% of total — these are effectively ongoing monthly giving programmes rather than acquisition campaigns.</p>
+    </div>
+
+    <!-- SECTION 3 — CHANNEL + RECURRING -->
+    <div class="section">
+      <p class="sec-label">Section 3</p>
+      <h2 class="sec-title">Channel Mix &amp; Recurring Structure</h2>
+      <div class="two">
+        <div>
+          <p class="divider-label">Pakistan Revenue by Channel</p>
+          <div class="bc">
+            <div class="br"><div class="bl w180">Google</div><div class="bt"><div class="bf bf-green" style="width:100%"><span>$32,529 · 31.0%</span></div></div><div class="ba">$32,529</div></div>
+            <div class="br"><div class="bl w180">Email</div><div class="bt"><div class="bf bf-gold" style="width:68.5%"><span>$22,279 · 21.3%</span></div></div><div class="ba">$22,279</div></div>
+            <div class="br"><div class="bl w180">Other / Unknown</div><div class="bt"><div class="bf bf-gray" style="width:89.3%"><span>$29,038 · 27.7%</span></div></div><div class="ba">$29,038</div></div>
+            <div class="br"><div class="bl w180">Meta</div><div class="bt"><div class="bf bf-rust" style="width:58.7%"><span>$19,079 · 18.2%</span></div></div><div class="ba">$19,079</div></div>
+            <div class="br"><div class="bl w180">Organic Social</div><div class="bt"><div class="bf bf-mf" style="width:3.1%"></div></div><div class="ba">$991 · 0.9%</div></div>
+            <div class="br"><div class="bl w180">SMS</div><div class="bt"><div class="bf bf-teal" style="width:2.3%"></div></div><div class="ba">$754 · 0.7%</div></div>
+          </div>
+          <p class="divider-label" style="margin-top:20px;">Recurring Frequency (Pakistan)</p>
+          <div class="bc">
+            <div class="br"><div class="bl w180">Monthly</div><div class="bt"><div class="bf bf-pak" style="width:100%"><span>$59,429 · 98.8%</span></div></div><div class="ba">$59,429</div></div>
+            <div class="br"><div class="bl w180">Annual</div><div class="bt"><div class="bf bf-gold" style="width:1.1%"></div></div><div class="ba">$642 · 1.1%</div></div>
+            <div class="br"><div class="bl w180">Quarterly</div><div class="bt"><div class="bf bf-gray" style="width:0.1%"></div></div><div class="ba">$50 · 0.1%</div></div>
+          </div>
+        </div>
+        <div>
+          <ul class="fl">
+            <li><div class="fn gold">1</div><div><strong>Three campaigns generate 82% of Pakistan MRR:</strong> "pakistan" ($17,612), "humaniti - pakistan" ($14,554), and "ca | donate directly" ($11,604). All three are overwhelmingly email-driven recurring programmes rather than paid acquisition campaigns.</div></li>
+            <li><div class="fn gold">2</div><div><strong>"saf: malnutrition" is 100% recurring</strong> — $5,311 from 21 donors, zero one-time. This specialist sub-programme is entirely recurring and shows the potential for cause-specific giving programmes within Pakistan.</div></li>
+            <li><div class="fn teal">3</div><div><strong>Monthly giving dominates at 98.8%</strong> of recurring revenue. Pakistan donors almost exclusively commit monthly — no weekly or bi-weekly programmes exist. Annual giving ($642) is trace-level.</div></li>
+            <li><div class="fn rust">4</div><div><strong>27.7% of Pakistan revenue is unattributed "Other" ($29,038).</strong> Combined with 0% website and near-zero social channels, this suggests significant direct/dark-social traffic. A UTM audit on Pakistan donation links could recover this to known channels.</div></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer"><div>Tab 1 · Pakistan · Jan 01 – Dec 31 2025</div><div>Clearoute Marketing Intelligence</div></div>
+    </div>
+  </div>
+</div><!-- /pak panel -->
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     TAB 2 — WATER
+═══════════════════════════════════════════════════════════ -->
+<div class="panel" id="panel-water">
+  <div class="th water">
+    <p class="th-eye">Tab 2 · Water Programmes · Humaniti Platform</p>
+    <h2 class="th-title">Water</h2>
+    <p class="th-sub">17 campaigns · Jan 01 – Dec 31 2025 · Campaign code: humaniti</p>
+  </div>
+  <div class="wrap">
+
+    <!-- Q2 DIRECT ANSWER -->
+    <div class="ans-banner water" style="margin-top:32px;">
+      <p class="ans-eye water">Direct Answer — Question 2: Water Recurring Donors</p>
+      <div class="ans-grid" style="grid-template-columns:repeat(4,1fr);">
+        <div>
+          <div style="font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:5px;">Total Water Revenue</div>
+          <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;">$6,271,081</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:3px;">17 programmes</div>
+        </div>
+        <div>
+          <div style="font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:5px;">Total Recurring in Water</div>
+          <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;">$1,406,114</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:3px;">22.4% recurring rate</div>
+        </div>
+        <div>
+          <div style="font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:5px;">MRR (Excl. Daily)</div>
+          <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;">$1,265,038</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:3px;">ARR $15,180,451</div>
+        </div>
+        <div>
+          <div style="font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:5px;">Recurring Donors</div>
+          <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;">12,445</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:3px;">16.4% of unique donors</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 1 — OVERVIEW -->
+    <div class="section">
+      <p class="sec-label">Section 1</p>
+      <h2 class="sec-title">Water Programme Overview</h2>
+      <p class="sec-intro">Water is Humaniti's largest cause at $6.27M — 5.97× the size of Masjid Fund and 59.8× Pakistan. The flagship "humaniti - water" alone contributes $4.52M (72.1%). A $1.27M MRR run-rate implies a $15.18M ARR — built on 12,445 recurring donors across 17 programmes.</p>
+
+      <div class="ks">
+        <div class="kpi hi"><div class="kl">Total Raised</div><div class="kv">$6,271,081</div><div class="kd">17 programmes</div></div>
+        <div class="kpi"><div class="kl">One-Time</div><div class="kv">$4,864,967</div><div class="kd">77.6% of total</div></div>
+        <div class="kpi water"><div class="kl">Recurring Revenue</div><div class="kv">$1,406,114</div><div class="kd">22.4% recurring rate</div></div>
+        <div class="kpi water"><div class="kl">MRR (Excl. Daily)</div><div class="kv">$1,265,038</div><div class="kd">ARR $15,180,451</div></div>
+        <div class="kpi"><div class="kl">Recurring Donors</div><div class="kv">12,445</div><div class="kd">16.4% of donor base</div></div>
+        <div class="kpi"><div class="kl">Unique Donors</div><div class="kv">76,069</div><div class="kd">New: 64,840 (85.2%)</div></div>
+        <div class="kpi"><div class="kl">Transactions</div><div class="kv">138,913</div><div class="kd">Avg $45.14 / txn</div></div>
+        <div class="kpi"><div class="kl">Flagship Share</div><div class="kv">72.1%</div><div class="kd">humaniti - water alone</div></div>
+      </div>
+    </div>
+
+    <!-- SECTION 2 — RECURRING BY PROGRAMME (the key table) -->
+    <div class="section">
+      <p class="sec-label">Section 2 · Question 2 Full Answer</p>
+      <h2 class="sec-title">Recurring Breakdown by Programme</h2>
+      <p class="sec-intro">All 17 water programmes ranked by recurring revenue. The top 6 account for $1.33M — 94.6% of total water recurring. Monthly cadence dominates at 88.3%; annual giving adds a meaningful 11.3% structural layer.</p>
+
+      <p class="divider-label">Recurring Revenue by Programme (max = humaniti - water $806,745)</p>
+      <div class="bc" style="margin-bottom:24px;">
+        <div class="br"><div class="bl w260">humaniti - water</div><div class="bt"><div class="bf bf-water" style="width:100%"><span>$806,745 · 57.4% of all water recurring</span></div></div><div class="ba">$806,745</div></div>
+        <div class="br"><div class="bl w260">humaniti - water additional</div><div class="bt"><div class="bf bf-water" style="width:27.7%"><span>$223,329</span></div></div><div class="ba">$223,329 · 15.9%</div></div>
+        <div class="br"><div class="bl w260">clean water <span style="font-size:9px;color:var(--teal)">(96.3% rec.)</span></div><div class="bt"><div class="bf bf-teal" style="width:13.5%"><span>$108,946 · 7.7%</span></div></div><div class="ba">$108,946</div></div>
+        <div class="br"><div class="bl w260">humaniti - water arabic</div><div class="bt"><div class="bf bf-gold" style="width:10.9%"><span>$88,315 · 6.3%</span></div></div><div class="ba">$88,315</div></div>
+        <div class="br"><div class="bl w260">humaniti - palestine water addl.</div><div class="bt"><div class="bf bf-indigo" style="width:5.9%"><span>$48,013 · 3.4%</span></div></div><div class="ba">$48,013</div></div>
+        <div class="br"><div class="bl w260">usa | clean water global site</div><div class="bt"><div class="bf bf-water" style="width:4.9%"><span>$39,399</span></div></div><div class="ba">$39,399 · 2.8%</div></div>
+        <div class="br"><div class="bl w260">muslimi - palestine water <span style="font-size:9px;color:var(--purple)">(93.9%)</span></div><div class="bt"><div class="bf bf-purple" style="width:2.95%"><span>$23,827</span></div></div><div class="ba">$23,827 · 1.7%</div></div>
+        <div class="br"><div class="bl w260">humaniti | solar water</div><div class="bt"><div class="bf bf-green" style="width:2.3%"></div></div><div class="ba">$18,691 · 1.3%</div></div>
+        <div class="br"><div class="bl w260">usa | clean water</div><div class="bt"><div class="bf bf-water" style="width:2.0%"></div></div><div class="ba">$16,273 · 1.2%</div></div>
+        <div class="br"><div class="bl w260">clean water global site</div><div class="bt"><div class="bf bf-water" style="width:1.9%"></div></div><div class="ba">$15,153 · 1.1%</div></div>
+        <div class="br"><div class="bl w260">ca | clean water global site</div><div class="bt"><div class="bf bf-water" style="width:0.95%"></div></div><div class="ba">$7,699 · 0.5%</div></div>
+        <div class="br"><div class="bl w260">humaniti - water m. agent</div><div class="bt"><div class="bf bf-water" style="width:0.66%"></div></div><div class="ba">$5,305 · 0.4%</div></div>
+        <div class="br"><div class="bl w260">humaniti - global solar water</div><div class="bt"><div class="bf bf-green" style="width:0.33%"></div></div><div class="ba">$2,696 · 0.2%</div></div>
+        <div class="br"><div class="bl w260">ca | clean water</div><div class="bt"><div class="bf bf-water" style="width:0.11%"></div></div><div class="ba">$896 · 0.1%</div></div>
+        <div class="br"><div class="bl w260">ca | event: ris (water)</div><div class="bt"><div class="bf bf-gray" style="width:0.06%"></div></div><div class="ba">$523 · 0.0%</div></div>
+        <div class="br"><div class="bl w260">water - khuzaimah &amp; muzammil</div><div class="bt"><div class="bf bf-gray" style="width:0.03%"></div></div><div class="ba">$232 · 0.0%</div></div>
+        <div class="br"><div class="bl w260">humaniti - water daily</div><div class="bt"><div class="bf bf-gray" style="width:0.01%"></div></div><div class="ba">$73 · 0.0%</div></div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>#</th><th>Programme</th>
+            <th class="r">Total Raised</th><th class="r">Recur. Total</th><th class="r">Recur %</th>
+            <th class="r">Monthly</th><th class="r">Annual</th><th class="r">Other Freq.</th>
+            <th class="r">MRR</th><th class="r">Recur Donors</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="acc-water"><td>1</td><td><strong>humaniti - water</strong></td><td class="r">$4,524,035</td><td class="r"><strong>$806,745</strong></td><td class="r">17.8%</td><td class="r">$670,511</td><td class="r">$133,499</td><td class="r">Wk $726 · BiM $975 · Qtr $765 · Semi $153</td><td class="r">$687,609</td><td class="r">8,252</td></tr>
+          <tr><td>2</td><td>humaniti - water additional</td><td class="r">$456,044</td><td class="r">$223,329</td><td class="r">49.0%</td><td class="r">$220,764</td><td class="r">$959</td><td class="r">Wk $305 · BiM $645 · Qtr $485 · Semi $171</td><td class="r">$223,169</td><td class="r">1,480</td></tr>
+          <tr><td>3</td><td>clean water <span class="badge b-teal">96.3% recurring</span></td><td class="r">$113,157</td><td class="r">$108,946</td><td class="r">96.3%</td><td class="r">$106,345</td><td class="r">$2,173</td><td class="r">BiM $188 · Qtr $10 · Semi $230</td><td class="r">$106,699</td><td class="r">534</td></tr>
+          <tr><td>4</td><td>humaniti - water arabic</td><td class="r">$391,770</td><td class="r">$88,315</td><td class="r">22.5%</td><td class="r">$72,558</td><td class="r">$15,547</td><td class="r">BiM $180 · Qtr $30</td><td class="r">$74,310</td><td class="r">918</td></tr>
+          <tr><td>5</td><td>humaniti - palestine water additional</td><td class="r">$84,280</td><td class="r">$48,013</td><td class="r">57.0%</td><td class="r">$46,711</td><td class="r">$1,125</td><td class="r">BiM $60 · Qtr $117</td><td class="r">$47,002</td><td class="r">382</td></tr>
+          <tr><td>6</td><td>usa | clean water global site</td><td class="r">$317,611</td><td class="r">$39,399</td><td class="r">12.4%</td><td class="r">$37,383</td><td class="r">$1,865</td><td class="r">Wk $91 · BiM $60</td><td class="r">$38,252</td><td class="r">232</td></tr>
+          <tr><td>7</td><td>muslimi - palestine water <span class="badge b-purple">93.9%</span></td><td class="r">$25,380</td><td class="r">$23,827</td><td class="r">93.9%</td><td class="r">$23,038</td><td class="r">$560</td><td class="r">BiM $171 · Qtr $21 · Semi $37</td><td class="r">$23,195</td><td class="r">154</td></tr>
+          <tr><td>8</td><td>humaniti | solar water</td><td class="r">$89,668</td><td class="r">$18,690</td><td class="r">20.8%</td><td class="r">$17,868</td><td class="r">$822</td><td class="r">—</td><td class="r">$18,048</td><td class="r">126</td></tr>
+          <tr><td>9</td><td>usa | clean water</td><td class="r">$94,454</td><td class="r">$16,273</td><td class="r">17.2%</td><td class="r">$15,749</td><td class="r">$524</td><td class="r">—</td><td class="r">$15,890</td><td class="r">117</td></tr>
+          <tr><td>10</td><td>clean water global site</td><td class="r">$70,539</td><td class="r">$15,153</td><td class="r">21.5%</td><td class="r">$14,780</td><td class="r">$373</td><td class="r">—</td><td class="r">$14,925</td><td class="r">122</td></tr>
+          <tr><td>11</td><td>ca | clean water global site</td><td class="r">$53,601</td><td class="r">$7,699</td><td class="r">14.4%</td><td class="r">$6,744</td><td class="r">$955</td><td class="r">—</td><td class="r">$6,824</td><td class="r">53</td></tr>
+          <tr><td>12</td><td>humaniti - water m. agent</td><td class="r">$28,433</td><td class="r">$5,305</td><td class="r">18.7%</td><td class="r">$4,507</td><td class="r">$592</td><td class="r">BiM $205</td><td class="r">$4,659</td><td class="r">49</td></tr>
+          <tr><td>13</td><td>humaniti - global solar water</td><td class="r">$14,548</td><td class="r">$2,696</td><td class="r">18.5%</td><td class="r">$2,696</td><td class="r">—</td><td class="r">—</td><td class="r">$2,847</td><td class="r">12</td></tr>
+          <tr><td>14</td><td>ca | clean water</td><td class="r">$4,241</td><td class="r">$896</td><td class="r">21.1%</td><td class="r">$849</td><td class="r">$47</td><td class="r">—</td><td class="r">$853</td><td class="r">9</td></tr>
+          <tr><td>15</td><td>ca | event: ris (water)</td><td class="r">$3,018</td><td class="r">$523</td><td class="r">17.3%</td><td class="r">$523</td><td class="r">—</td><td class="r">—</td><td class="r">$523</td><td class="r">3</td></tr>
+          <tr><td>16</td><td>water - khuzaimah &amp; muzammil</td><td class="r">$232</td><td class="r">$232</td><td class="r">100%</td><td class="r">$232</td><td class="r">—</td><td class="r">—</td><td class="r">$232</td><td class="r">1</td></tr>
+          <tr><td>17</td><td>humaniti - water daily</td><td class="r">$73</td><td class="r">$73</td><td class="r">100%</td><td class="r">—</td><td class="r">—</td><td class="r">Daily $73</td><td class="r">—</td><td class="r">1</td></tr>
+          <tr class="total"><td colspan="2">TOTAL — ALL WATER</td><td class="r">$6,271,081</td><td class="r">$1,406,114</td><td class="r">22.4%</td><td class="r">$1,241,257</td><td class="r">$159,041</td><td class="r">Wk $1,123 · BiM $2,484 · Qtr $1,428 · Semi $591</td><td class="r">$1,265,038</td><td class="r">12,445</td></tr>
+        </tbody>
+      </table>
+      <p class="fn-note">Freq. abbreviations: Wk = Weekly · BiM = Bi-Monthly · Qtr = Quarterly · Semi = Semi-Annual. MRR excludes daily givers.</p>
+
+      <div class="co teal" style="margin-top:20px;">
+        <strong>Annual giving in Water is $159,041 — 11.3% of all water recurring</strong>. The flagship "humaniti - water" alone carries $133,499 in annual recurring gifts. Annual donors tend to be higher-net-worth and more retention-resistant than monthly givers. A structured annual giving track — separate creative, separate touchpoints — could unlock significant incremental ARR.
+      </div>
+
+      <div class="co purple" style="margin-top:12px;">
+        <strong>"muslimi - palestine water" is 93.9% recurring</strong> — $23,827 of $25,380 total, 154 donors, $23,195 MRR. This is a small but extremely committed cross-platform cohort. It signals that the Palestinian audience within the water cause is highly retainable once acquired.
+      </div>
+
+      <div class="footer"><div>Tab 2 · Water Programmes · Jan 01 – Dec 31 2025</div><div>Clearoute Marketing Intelligence</div></div>
+    </div>
+  </div>
+</div><!-- /water panel -->
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     TAB 3 — MUSLIMI GAZA
+═══════════════════════════════════════════════════════════ -->
+<div class="panel" id="panel-gaza">
+  <div class="th gaza">
+    <p class="th-eye">Tab 3 · Muslimi Platform · Gaza Campaign</p>
+    <h2 class="th-title">Muslimi — Gaza</h2>
+    <p class="th-sub">1 campaign · Campaign code: muslimi · Jan 01 – Dec 31 2025</p>
+  </div>
+  <div class="wrap">
+
+    <!-- Q5a DIRECT ANSWER -->
+    <div class="ans-banner gaza" style="margin-top:32px;">
+      <p class="ans-eye gaza">Direct Answer — Question 5: Muslimi Gaza Recurring Donations</p>
+      <div class="ans-grid" style="grid-template-columns:repeat(4,1fr);">
+        <div><div style="font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--indigo);margin-bottom:5px;">Total Gaza Raised</div><div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;">$600,861</div><div style="font-size:10px;color:var(--muted);margin-top:3px;">muslimi campaign code</div></div>
+        <div><div style="font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--indigo);margin-bottom:5px;">Total Recurring</div><div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;">$137,948</div><div style="font-size:10px;color:var(--muted);margin-top:3px;">23.0% recurring rate</div></div>
+        <div><div style="font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--indigo);margin-bottom:5px;">MRR (Excl. Daily)</div><div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;">$134,456</div><div style="font-size:10px;color:var(--muted);margin-top:3px;">ARR $1,613,468</div></div>
+        <div><div style="font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--indigo);margin-bottom:5px;">Recurring Donors</div><div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;">856</div><div style="font-size:10px;color:var(--muted);margin-top:3px;">16.3% of all Gaza donors</div></div>
+      </div>
+    </div>
+
+    <!-- SECTION 1 — OVERVIEW -->
+    <div class="section">
+      <p class="sec-label">Section 1</p>
+      <h2 class="sec-title">Gaza Campaign Overview</h2>
+      <p class="sec-intro">Gaza is Muslimi's sole active campaign code, generating $600,861 in 2025 from 12,751 transactions. It is the most organically-driven programme in this report — organic social and unattributed "Other" account for 90.4% of revenue — with minimal paid media. Despite this, 856 donors have converted to monthly recurring giving.</p>
+
+      <div class="ks">
+        <div class="kpi hi"><div class="kl">Total Raised</div><div class="kv">$600,861</div><div class="kd">muslimi code · 1 campaign</div></div>
+        <div class="kpi"><div class="kl">One-Time Revenue</div><div class="kv">$462,912</div><div class="kd">77.0% of total</div></div>
+        <div class="kpi gaza"><div class="kl">Recurring Revenue</div><div class="kv">$137,948</div><div class="kd">23.0% recurring rate</div></div>
+        <div class="kpi gaza"><div class="kl">MRR (Excl. Daily)</div><div class="kv">$134,456</div><div class="kd">ARR $1,613,468</div></div>
+        <div class="kpi"><div class="kl">Recurring Donors</div><div class="kv">856</div><div class="kd">of 5,254 unique donors</div></div>
+        <div class="kpi"><div class="kl">Avg. One-Time Gift</div><div class="kv">$63.31</div><div class="kd">vs. $25.36 recurring/mo</div></div>
+        <div class="kpi"><div class="kl">New Donors</div><div class="kv">4,362</div><div class="kd">83.0% new-to-file</div></div>
+        <div class="kpi"><div class="kl">Transactions</div><div class="kv">12,751</div><div class="kd">Avg $47.12 / txn</div></div>
+      </div>
+
+      <div class="two">
+        <div>
+          <p class="divider-label">Gaza Recurring — Frequency Breakdown</p>
+          <div class="bc">
+            <div class="br"><div class="bl w180">Monthly</div><div class="bt"><div class="bf bf-gaza" style="width:100%"><span>$133,780 · 97.0%</span></div></div><div class="ba">$133,780</div></div>
+            <div class="br"><div class="bl w180">Annual</div><div class="bt"><div class="bf bf-gold" style="width:2.8%"></div></div><div class="ba">$3,848 · 2.8%</div></div>
+            <div class="br"><div class="bl w180">Quarterly</div><div class="bt"><div class="bf bf-gray" style="width:0.2%"></div></div><div class="ba">$311 · 0.2%</div></div>
+            <div class="br"><div class="bl w180">Bi-Monthly</div><div class="bt"><div class="bf bf-gray" style="width:0.007%"></div></div><div class="ba">$10 · 0.0%</div></div>
+          </div>
+          <hr class="div">
+          <p class="divider-label">Gaza Revenue by Channel</p>
+          <div class="bc">
+            <div class="br"><div class="bl w180">Other / Unknown</div><div class="bt"><div class="bf bf-gray" style="width:100%"><span>$340,350 · 56.6%</span></div></div><div class="ba">$340,350</div></div>
+            <div class="br"><div class="bl w180">Organic Social</div><div class="bt"><div class="bf bf-gaza" style="width:59.6%"><span>$202,900 · 33.8%</span></div></div><div class="ba">$202,900</div></div>
+            <div class="br"><div class="bl w180">Meta</div><div class="bt"><div class="bf bf-rust" style="width:6.3%"></div></div><div class="ba">$21,464 · 3.6%</div></div>
+            <div class="br"><div class="bl w180">Email</div><div class="bt"><div class="bf bf-gold" style="width:3.9%"></div></div><div class="ba">$13,145 · 2.2%</div></div>
+            <div class="br"><div class="bl w180">SMS</div><div class="bt"><div class="bf bf-teal" style="width:2.6%"></div></div><div class="ba">$8,817 · 1.5%</div></div>
+            <div class="br"><div class="bl w180">Google</div><div class="bt"><div class="bf bf-green" style="width:2.5%"></div></div><div class="ba">$8,481 · 1.4%</div></div>
+            <div class="br"><div class="bl w180">Website</div><div class="bt"><div class="bf bf-gray" style="width:1.7%"></div></div><div class="ba">$5,685 · 0.9%</div></div>
+          </div>
+        </div>
+        <div>
+          <ul class="fl">
+            <li><div class="fn indigo">1</div><div><strong>90.4% of Gaza revenue is organic or unattributed</strong> — organic social ($202,900) + other ($340,350). This is uniquely low-cost — the programme runs largely without paid acquisition. The unattributed bucket likely includes WhatsApp/Telegram dark social and direct link sharing.</div></li>
+            <li><div class="fn indigo">2</div><div><strong>Monthly giving is 97.0% of all Gaza recurring</strong> — $133,780 of $137,948. Gaza donors who convert to recurring almost exclusively choose monthly cadence. Annual ($3,848) and quarterly ($311) are traces.</div></li>
+            <li><div class="fn gold">3</div><div><strong>83% of donors are new to file (4,362 new)</strong> — Gaza is a powerful new-donor acquisition engine without paid media. Community-driven sharing is doing the acquisition work. With a structured email onboarding sequence, the 23% recurring conversion rate could be pushed higher.</div></li>
+            <li><div class="fn gold">4</div><div><strong>Average recurring gift is $25.36/month</strong> — significantly below the one-time average of $63.31. An upgrade programme targeting the 856-donor recurring base ($5 increase = $4,280/mo in incremental MRR at no acquisition cost) is the highest-ROI action available for this campaign.</div></li>
+            <li><div class="fn rust">5</div><div><strong>Paid media is minimal — Google 1.4%, Meta 3.6%.</strong> Unlike Water and Masjid Fund where paid is 60–80% of revenue, Gaza operates almost entirely through community sharing. Introducing targeted paid will likely accelerate new donor volume but must be managed carefully to preserve organic authenticity.</div></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer"><div>Tab 3 · Muslimi — Gaza · Jan 01 – Dec 31 2025</div><div>Clearoute Marketing Intelligence</div></div>
+    </div>
+  </div>
+</div><!-- /gaza panel -->
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     TAB 4 — MUSLIMI MASJID FUND
+═══════════════════════════════════════════════════════════ -->
+<div class="panel" id="panel-mf">
+  <div class="th mf">
+    <p class="th-eye">Tab 4 · Muslimi Platform · Masjid Fund Campaigns</p>
+    <h2 class="th-title">Muslimi — Masjid Fund</h2>
+    <p class="th-sub">16 campaigns across 6 campaign codes · Jan 01 – Dec 31 2025</p>
+  </div>
+  <div class="wrap">
+
+    <!-- Q5b DIRECT ANSWER -->
+    <div class="ans-banner mf" style="margin-top:32px;">
+      <p class="ans-eye mf">Direct Answer — Question 5: Total for Masjid Fund</p>
+      <div class="ans-grid" style="grid-template-columns:repeat(4,1fr);">
+        <div><div style="font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--green);margin-bottom:5px;">Total Masjid Fund Raised</div><div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;">$1,947,288</div><div style="font-size:10px;color:var(--muted);margin-top:3px;">All 16 campaigns combined</div></div>
+        <div><div style="font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--green);margin-bottom:5px;">Total Recurring</div><div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;">$420,234</div><div style="font-size:10px;color:var(--muted);margin-top:3px;">21.6% recurring rate · 3,467 donors</div></div>
+        <div><div style="font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--green);margin-bottom:5px;">MRR (Excl. Daily)</div><div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;">$389,245</div><div style="font-size:10px;color:var(--muted);margin-top:3px;">ARR $4,670,940</div></div>
+        <div><div style="font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--green);margin-bottom:5px;">Unique Donors</div><div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;">25,785</div><div style="font-size:10px;color:var(--muted);margin-top:3px;">New: 23,141 (89.7%)</div></div>
+      </div>
+    </div>
+
+    <!-- SECTION 1 — OVERVIEW WITH SPLIT -->
+    <div class="section">
+      <p class="sec-label">Section 1</p>
+      <h2 class="sec-title">Masjid Fund — Two Distinct Groups</h2>
+      <p class="sec-intro">Masjid Fund spans 16 campaigns across 6 campaign codes. For analytical clarity, this tab distinguishes between campaigns using the core <strong>"masjid fund"</strong> campaign code (5 campaigns, email-driven, high-recurring) and campaigns using specific mosque codes such as Al Abrar, Abu Huraira, Centretown, and others (11 campaigns, paid-acquisition driven, lower-recurring).</p>
+
+      <div class="ks">
+        <div class="kpi hi"><div class="kl">All MF Total</div><div class="kv">$1,947,288</div><div class="kd">All 16 campaigns</div></div>
+        <div class="kpi mf"><div class="kl">Code = 'masjid fund'</div><div class="kv">$296,184</div><div class="kd">5 campaigns · 54.7% recurring</div></div>
+        <div class="kpi mf"><div class="kl">Specific Mosque Codes</div><div class="kv">$1,651,105</div><div class="kd">11 campaigns · 15.6% recurring</div></div>
+        <div class="kpi"><div class="kl">Combined MRR</div><div class="kv">$389,245</div><div class="kd">ARR $4,670,940</div></div>
+        <div class="kpi"><div class="kl">Recurring Donors (All)</div><div class="kv">3,467</div><div class="kd">Core: 1,144 · Mosque: 2,323</div></div>
+        <div class="kpi"><div class="kl">Transactions</div><div class="kv">44,748</div><div class="kd">Avg $43.51 / txn</div></div>
+        <div class="kpi"><div class="kl">Unique Donors</div><div class="kv">25,785</div><div class="kd">89.7% new-to-file</div></div>
+        <div class="kpi gold"><div class="kl">Highest Recurring Rate</div><div class="kv">54.7%</div><div class="kd">Code='masjid fund' group</div></div>
+      </div>
+
+      <!-- SIDE-BY-SIDE COMPARISON -->
+      <div class="two" style="margin-top:28px;">
+        <div style="border:1px solid var(--green);padding:20px;">
+          <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:12px;color:var(--green);">Group A — Code = "masjid fund"</div>
+          <div style="font-size:10px;color:var(--muted);margin-bottom:14px;">5 campaigns · email-heavy · high-recurring · smaller volume</div>
+          <table style="font-size:11px;">
+            <tr><td style="padding:5px 0;color:var(--muted);">Total Raised</td><td class="r" style="padding:5px 0;"><strong>$296,184</strong></td></tr>
+            <tr><td style="padding:5px 0;color:var(--muted);">Recurring</td><td class="r" style="padding:5px 0;"><strong>$162,095</strong> (54.7%)</td></tr>
+            <tr><td style="padding:5px 0;color:var(--muted);">MRR</td><td class="r" style="padding:5px 0;"><strong>$157,977</strong></td></tr>
+            <tr><td style="padding:5px 0;color:var(--muted);">ARR</td><td class="r" style="padding:5px 0;">$1,895,722</td></tr>
+            <tr><td style="padding:5px 0;color:var(--muted);">Recurring Donors</td><td class="r" style="padding:5px 0;">1,144</td></tr>
+            <tr><td style="padding:5px 0;color:var(--muted);">New Donors</td><td class="r" style="padding:5px 0;">2,132 (69.1%)</td></tr>
+            <tr><td style="padding:5px 0;color:var(--muted);">Top Channel</td><td class="r" style="padding:5px 0;">Email 42.9%</td></tr>
+          </table>
+        </div>
+        <div style="border:1px solid var(--rule);padding:20px;">
+          <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:12px;color:var(--indigo);">Group B — Specific Mosque Codes</div>
+          <div style="font-size:10px;color:var(--muted);margin-bottom:14px;">11 campaigns · paid-driven · lower-recurring · larger volume</div>
+          <table style="font-size:11px;">
+            <tr><td style="padding:5px 0;color:var(--muted);">Total Raised</td><td class="r" style="padding:5px 0;"><strong>$1,651,105</strong></td></tr>
+            <tr><td style="padding:5px 0;color:var(--muted);">Recurring</td><td class="r" style="padding:5px 0;"><strong>$258,139</strong> (15.6%)</td></tr>
+            <tr><td style="padding:5px 0;color:var(--muted);">MRR</td><td class="r" style="padding:5px 0;"><strong>$231,268</strong></td></tr>
+            <tr><td style="padding:5px 0;color:var(--muted);">ARR</td><td class="r" style="padding:5px 0;">$2,775,217</td></tr>
+            <tr><td style="padding:5px 0;color:var(--muted);">Recurring Donors</td><td class="r" style="padding:5px 0;">2,323</td></tr>
+            <tr><td style="padding:5px 0;color:var(--muted);">New Donors</td><td class="r" style="padding:5px 0;">21,009 (92.6%)</td></tr>
+            <tr><td style="padding:5px 0;color:var(--muted);">Top Channel</td><td class="r" style="padding:5px 0;">Meta 43.8%</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="co green" style="margin-top:20px;">
+        <strong>The two groups operate completely differently.</strong> Group A ("masjid fund" code) is a retention-and-email programme with a 54.7% recurring rate and $157,977 MRR from just 1,144 recurring donors — the most valuable recurring cohort per-donor in this report. Group B (mosque-specific codes) is paid-acquisition at scale — $1.65M raised but only 15.6% recurring from 22,699 donors. The strategic implication: Group B donors who haven't converted to recurring are a prime retargeting audience for Group A email journeys.
+      </div>
+    </div>
+
+    <!-- SECTION 2 — GROUP A TABLE -->
+    <div class="section">
+      <p class="sec-label">Section 2</p>
+      <h2 class="sec-title">Group A — Campaign Code = "masjid fund"</h2>
+      <p class="sec-intro">Five campaigns all using the core "masjid fund" code. Email is the primary channel (42.9%), making this a fundamentally different programme from the mosque-specific campaigns. The "masjid fund - additional" campaign is the largest by MRR at $96,737.</p>
+
+      <table>
+        <thead>
+          <tr><th>Campaign</th><th class="r">Total Raised</th><th class="r">Recurring</th><th class="r">Recur %</th><th class="r">MRR</th><th class="r">Recur Donors</th><th class="r">New Donors</th><th>Top Channel</th></tr>
+        </thead>
+        <tbody>
+          <tr class="acc-mf"><td><strong>masjid fund - additional</strong></td><td class="r">$130,480</td><td class="r"><strong>$99,321</strong></td><td class="r">76.1%</td><td class="r">$96,737</td><td class="r">727</td><td class="r">768 (60.7%)</td><td>Meta 40.3% / Email 10.9%</td></tr>
+          <tr><td>masjid fund</td><td class="r">$107,018</td><td class="r">$53,736</td><td class="r">50.2%</td><td class="r">$52,943</td><td class="r">356</td><td class="r">853 (70.3%)</td><td>Email 62.5%</td></tr>
+          <tr><td>masjid fund - international</td><td class="r">$57,955</td><td class="r">$8,305</td><td class="r">14.3%</td><td class="r">$8,152</td><td class="r">53</td><td class="r">508 (84.8%)</td><td>Email 77.9%</td></tr>
+          <tr><td>masjid fund daily (dhul hijjah)</td><td class="r">$479</td><td class="r">$479</td><td class="r">100%</td><td class="r">$117</td><td class="r">4</td><td class="r">2 (50%)</td><td>Email 95.8%</td></tr>
+          <tr><td>masjid fund - automate donations for ramadan</td><td class="r">$253</td><td class="r">$253</td><td class="r">100%</td><td class="r">$28</td><td class="r">4</td><td class="r">1 (25%)</td><td>Email 100%</td></tr>
+          <tr class="total"><td>GROUP A TOTAL</td><td class="r">$296,184</td><td class="r">$162,095</td><td class="r">54.7%</td><td class="r">$157,977</td><td class="r">1,144</td><td class="r">2,132 (69.1%)</td><td>Email 42.9%</td></tr>
+        </tbody>
+      </table>
+
+      <div class="co">
+        <strong>"masjid fund - additional" is the Group A powerhouse</strong> — $130,480 raised, $96,737 MRR, and 727 recurring donors. Its 76.1% recurring rate signals this is primarily a recurring upgrade/cross-sell campaign rather than an acquisition campaign. The "additional" structure is working well here as a pathway from one-time to recurring.
+      </div>
+    </div>
+
+    <!-- SECTION 3 — GROUP B TABLE -->
+    <div class="section">
+      <p class="sec-label">Section 3</p>
+      <h2 class="sec-title">Group B — Specific Mosque Campaign Codes</h2>
+      <p class="sec-intro">Eleven campaigns with mosque-specific codes (Al Abrar, Abu Huraira, Centretown, Darul Khair, Daleel). Google and Meta together drive 81.4% of Group B revenue. These are primarily paid-acquisition campaigns for specific mosque building funds with lower recurring conversion.</p>
+
+      <table>
+        <thead>
+          <tr><th>Campaign Code</th><th>Campaign Name</th><th class="r">Total Raised</th><th class="r">Recurring</th><th class="r">Recur %</th><th class="r">MRR</th><th class="r">Recur Donors</th><th class="r">New Donors</th></tr>
+        </thead>
+        <tbody>
+          <tr class="group"><td colspan="8">Al Abrar (3 campaigns) — Total $1,356,645 · Rec $221,506 · MRR $198,523</td></tr>
+          <tr class="acc-mf"><td>masjid fund - al abrar</td><td>masjid fund - al abrar (arabic)</td><td class="r">$765,465</td><td class="r"><strong>$110,670</strong></td><td class="r">14.5%</td><td class="r">$102,721</td><td class="r">852</td><td class="r">8,699</td></tr>
+          <tr><td>masjid fund - al abrar</td><td>masjid fund - al abrar</td><td class="r">$469,005</td><td class="r">$82,128</td><td class="r">17.5%</td><td class="r">$70,728</td><td class="r">811</td><td class="r">6,311</td></tr>
+          <tr><td>masjid fund - al abrar</td><td>masjid fund - al abrar additional</td><td class="r">$122,176</td><td class="r">$28,708</td><td class="r">23.5%</td><td class="r">$25,075</td><td class="r">295</td><td class="r">1,870</td></tr>
+          <tr class="group"><td colspan="8">Centretown Mosque (2 campaigns) — Total $209,300 · Rec $21,398 · MRR $18,521</td></tr>
+          <tr><td>masjid fund - centretown mosque</td><td>masjid fund - centretown mosque</td><td class="r">$160,753</td><td class="r">$16,178</td><td class="r">10.1%</td><td class="r">$14,058</td><td class="r">162</td><td class="r">2,214</td></tr>
+          <tr><td>masjid fund - centretown mosque</td><td>masjid fund - centretown mosque - arabic</td><td class="r">$48,547</td><td class="r">$5,220</td><td class="r">10.8%</td><td class="r">$4,464</td><td class="r">72</td><td class="r">643</td></tr>
+          <tr class="group"><td colspan="8">Abu Huraira (4 campaigns) — Total $76,187 · Rec $14,322 · MRR $13,538</td></tr>
+          <tr><td>masjid fund - abu huraira</td><td>masjid fund - abu huraira wudhu</td><td class="r">$60,449</td><td class="r">$13,312</td><td class="r">22.0%</td><td class="r">$12,652</td><td class="r">103</td><td class="r">900</td></tr>
+          <tr><td>masjid fund - abu huraira</td><td>masjid fund - abu huraira</td><td class="r">$10,266</td><td class="r">$685</td><td class="r">6.7%</td><td class="r">$562</td><td class="r">16</td><td class="r">188</td></tr>
+          <tr><td>masjid fund - abu huraira</td><td>masjid fund - abu huraira iftar</td><td class="r">$4,433</td><td class="r">$75</td><td class="r">1.7%</td><td class="r">$75</td><td class="r">2</td><td class="r">19</td></tr>
+          <tr><td>masjid fund - abu huraira</td><td>masjid fund - abu huraira arabic</td><td class="r">$1,041</td><td class="r">$250</td><td class="r">24.0%</td><td class="r">$250</td><td class="r">2</td><td class="r">9</td></tr>
+          <tr class="group"><td colspan="8">Darul Khair / Daleel (2 campaigns) — Total $8,972 · Rec $913 · MRR $685</td></tr>
+          <tr><td>masjid fund - darul khair</td><td>masjid fund - darul khair</td><td class="r">$6,631</td><td class="r">$832</td><td class="r">12.6%</td><td class="r">$604</td><td class="r">7</td><td class="r">108</td></tr>
+          <tr><td>masjid fund - daleel</td><td>masjid fund - daleel</td><td class="r">$2,341</td><td class="r">$81</td><td class="r">3.5%</td><td class="r">$81</td><td class="r">1</td><td class="r">48</td></tr>
+          <tr class="total"><td colspan="2">GROUP B TOTAL</td><td class="r">$1,651,105</td><td class="r">$258,139</td><td class="r">15.6%</td><td class="r">$231,268</td><td class="r">2,323</td><td class="r">21,009 (92.6%)</td></tr>
+        </tbody>
+      </table>
+
+      <div class="co green" style="margin-top:20px;">
+        <strong>Al Abrar is the Group B standout</strong> — $1,356,645 raised (82.1% of Group B total) across 3 campaigns. The Arabic variant alone ($765,465) is the largest single Masjid Fund campaign in the dataset. Al Abrar's recurring rate (14.5–23.5%) is modest but its sheer volume means its 1,958 recurring donors contribute $198,523 MRR — more than Group A's entire MRR of $157,977.
+      </div>
+
+      <div class="co indigo" style="margin-top:12px;">
+        <strong>Centretown Mosque's recurring rate is only 10%</strong> — significantly below the Masjid Fund average. With 2,857 unique donors across 2 campaigns, this represents a large under-activated recurring audience. A dedicated recurring upgrade ask at the 30-day post-donation mark could meaningfully shift this metric.
+      </div>
+    </div>
+
+    <!-- SECTION 4 — COMBINED SUMMARY -->
+    <div class="section">
+      <p class="sec-label">Section 4 · Summary</p>
+      <h2 class="sec-title">Full Masjid Fund Summary</h2>
+
+      <div class="ks">
+        <div class="kpi hi"><div class="kl">All MF Total Raised</div><div class="kv">$1,947,288</div><div class="kd">16 campaigns · 6 codes</div></div>
+        <div class="kpi"><div class="kl">One-Time Revenue</div><div class="kv">$1,527,054</div><div class="kd">78.4% of total</div></div>
+        <div class="kpi mf"><div class="kl">Recurring Revenue</div><div class="kv">$420,234</div><div class="kd">21.6% recurring rate</div></div>
+        <div class="kpi mf"><div class="kl">MRR (All · Excl. Daily)</div><div class="kv">$389,245</div><div class="kd">ARR $4,670,940</div></div>
+        <div class="kpi"><div class="kl">Group A MRR</div><div class="kv">$157,977</div><div class="kd">Code='masjid fund' · 54.7% rec.</div></div>
+        <div class="kpi"><div class="kl">Group B MRR</div><div class="kv">$231,268</div><div class="kd">Mosque-specific codes · 15.6% rec.</div></div>
+        <div class="kpi"><div class="kl">Total Recurring Donors</div><div class="kv">3,467</div><div class="kd">A: 1,144 · B: 2,323</div></div>
+        <div class="kpi"><div class="kl">Unique Donors</div><div class="kv">25,785</div><div class="kd">New: 23,141 (89.7%)</div></div>
+      </div>
+
+      <p class="divider-label">Recurring Frequency — All Masjid Fund Combined</p>
+      <div class="bc">
+        <div class="br"><div class="bl w180">Monthly</div><div class="bt"><div class="bf bf-mf" style="width:100%"><span>$384,439 · 91.5%</span></div></div><div class="ba">$384,439</div></div>
+        <div class="br"><div class="bl w180">Annual</div><div class="bt"><div class="bf bf-gold" style="width:8.9%"><span>$34,140</span></div></div><div class="ba">$34,140 · 8.1%</div></div>
+        <div class="br"><div class="bl w180">Weekly</div><div class="bt"><div class="bf bf-gray" style="width:0.014%"></div></div><div class="ba">$60 · 0.0%</div></div>
+        <div class="br"><div class="bl w180">Bi-Weekly</div><div class="bt"><div class="bf bf-gray" style="width:0.052%"></div></div><div class="ba">$220 · 0.1%</div></div>
+        <div class="br"><div class="bl w180">Quarterly</div><div class="bt"><div class="bf bf-gray" style="width:0.21%"></div></div><div class="ba">$878 · 0.2%</div></div>
+        <div class="br"><div class="bl w180">Daily</div><div class="bt"><div class="bf bf-gray" style="width:0.054%"></div></div><div class="ba">$227 · 0.1%</div></div>
+      </div>
+
+      <div class="footer"><div>Tab 4 · Muslimi — Masjid Fund · Jan 01 – Dec 31 2025</div><div>Clearoute Marketing Intelligence</div></div>
+    </div>
+  </div>
+</div><!-- /mf panel -->
+
+
+<script>
+function go(tab){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('ap','aw','ag','am'));
+  document.getElementById('panel-'+tab).classList.add('active');
+  const map={pak:'ap',water:'aw',gaza:'ag',mf:'am'};
+  document.getElementById('btn-'+tab).classList.add(map[tab]);
+  document.querySelector('.tab-nav').scrollIntoView({behavior:'smooth',block:'start'});
+}
+document.getElementById('btn-pak').classList.add('ap');
+</script>
+</body>
+</html>
