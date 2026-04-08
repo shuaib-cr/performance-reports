@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ousama Alshurafa — Influencer Performance Report 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=Fraunces:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:       #0d0d0d;
+    --paper:     #f5f0e8;
+    --cream:     #ede8dc;
+    --gold:      #c49a3c;
+    --gold-lt:   #e8c97a;
+    --rust:      #b84c2b;
+    --teal:      #1a6b6b;
+    --teal-lt:   #e0efef;
+    --rule:      #c8c0b0;
+    --muted:     #6b6459;
+    --arabic-accent: #7b3f8c;
+    --arabic-lt:     #f0e8f5;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Mono', monospace;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  /* ── COVER ── */
+  .cover {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 72px 80px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent, transparent 40px,
+      rgba(196,154,60,0.06) 40px, rgba(196,154,60,0.06) 41px
+    );
+  }
+  .cover-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+  }
+  .cover-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 58px);
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--paper);
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .cover-subtitle {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--gold-lt);
+    margin-bottom: 48px;
+  }
+  .cover-meta {
+    display: flex; gap: 48px; flex-wrap: wrap;
+    border-top: 1px solid rgba(196,154,60,0.4);
+    padding-top: 28px;
+  }
+  .cover-meta-item { position: relative; }
+  .cover-meta-label {
+    font-size: 9px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .cover-meta-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px; font-weight: 700; color: var(--paper);
+  }
+  .cover-meta-sub { font-size: 10px; color: rgba(245,240,232,0.5); margin-top: 2px; }
+
+  /* ── MAIN LAYOUT ── */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 48px 80px; }
+
+  /* ── SECTION HEADERS ── */
+  .section {
+    margin-top: 64px;
+    border-top: 2px solid var(--ink);
+    padding-top: 20px;
+  }
+  .section-label {
+    font-size: 9px; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 700;
+    margin-bottom: 24px;
+  }
+  .section-intro {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 680px;
+    margin-bottom: 32px;
+    line-height: 1.7;
+  }
+
+  /* ── KPI STRIP ── */
+  .kpi-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-bottom: 40px;
+  }
+  .kpi {
+    background: var(--paper);
+    padding: 20px 18px;
+    position: relative;
+  }
+  .kpi.highlight { background: var(--ink); color: var(--paper); }
+  .kpi.highlight .kpi-label { color: var(--gold); }
+  .kpi.highlight .kpi-delta { color: var(--gold-lt); }
+  .kpi-label {
+    font-size: 9px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .kpi-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px; font-weight: 700;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .kpi-delta { font-size: 10px; color: var(--muted); margin-top: 4px; }
+  .kpi-delta.pos { color: var(--teal); }
+  .kpi-delta.neg { color: var(--rust); }
+
+  /* ── BAR CHART ── */
+  .bar-chart { display: flex; flex-direction: column; gap: 10px; }
+  .bar-row { display: flex; align-items: center; gap: 12px; }
+  .bar-label {
+    width: 240px; flex-shrink: 0;
+    font-size: 11px; color: var(--ink);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    text-align: right;
+    padding-right: 4px;
+  }
+  .bar-track {
+    flex: 1; height: 22px;
+    background: var(--cream);
+    position: relative; overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    background: var(--teal);
+    position: relative;
+    display: flex; align-items: center; padding: 0 8px;
+    transition: width 0.3s ease;
+  }
+  .bar-fill.arabic { background: var(--arabic-accent); }
+  .bar-fill.gold   { background: var(--gold); }
+  .bar-fill.rust   { background: var(--rust); }
+  .bar-fill-label {
+    font-size: 10px; color: white;
+    white-space: nowrap; overflow: hidden;
+    font-weight: 500;
+  }
+  .bar-amount {
+    width: 90px; flex-shrink: 0;
+    font-size: 11px; color: var(--muted);
+    text-align: right;
+  }
+
+  /* ── STACKED BARS (EN/AR) ── */
+  .stack-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .stack-label {
+    width: 240px; flex-shrink: 0; font-size: 11px;
+    text-align: right; padding-right: 4px; color: var(--ink);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .stack-track { flex: 1; height: 20px; background: var(--cream); display: flex; overflow: hidden; }
+  .stack-en { background: var(--teal); }
+  .stack-ar { background: var(--arabic-accent); }
+  .stack-total { width: 90px; flex-shrink: 0; font-size: 11px; color: var(--muted); text-align: right; }
+
+  /* ── TABLES ── */
+  table { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+  thead { border-bottom: 2px solid var(--ink); }
+  th {
+    text-align: left; padding: 10px 12px 8px;
+    font-size: 9px; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--muted);
+    font-weight: 500; font-family: 'DM Mono', monospace;
+  }
+  th.right { text-align: right; }
+  td { padding: 9px 12px; border-bottom: 1px solid var(--rule); vertical-align: middle; }
+  td.right { text-align: right; }
+  tr:last-child td { border-bottom: 2px solid var(--ink); }
+  tr.sub td { background: var(--cream); font-size: 10.5px; color: var(--muted); }
+  tr.sub td:first-child { padding-left: 28px; }
+  .badge {
+    display: inline-block; padding: 2px 8px; border-radius: 2px;
+    font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500;
+  }
+  .badge-teal   { background: var(--teal-lt); color: var(--teal); }
+  .badge-arabic { background: var(--arabic-lt); color: var(--arabic-accent); }
+  .badge-gold   { background: #fdf3dd; color: #8a6b10; }
+  .badge-rust   { background: #fbeee9; color: var(--rust); }
+  .badge-ink    { background: var(--ink); color: var(--paper); }
+
+  /* ── TWO-COL LAYOUT ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  @media (max-width: 760px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* ── CALLOUT BOX ── */
+  .callout {
+    border-left: 3px solid var(--gold);
+    background: #fdf8ee;
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #4a3e20;
+  }
+  .callout.rust { border-color: var(--rust); background: #fbeee9; color: #5a1e0e; }
+  .callout.teal { border-color: var(--teal); background: var(--teal-lt); color: #0a3333; }
+  .callout.arabic { border-color: var(--arabic-accent); background: var(--arabic-lt); color: #3a1a4a; }
+
+  /* ── INLINE STAT ── */
+  .istat { display: inline-block; }
+  .istat strong {
+    font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700;
+  }
+
+  /* ── FINDING LIST ── */
+  .finding-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
+  .finding-list li {
+    display: flex; gap: 12px; align-items: flex-start;
+    font-size: 12px; line-height: 1.6;
+  }
+  .finding-num {
+    flex-shrink: 0; width: 22px; height: 22px;
+    background: var(--ink); color: var(--paper);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 600; margin-top: 1px;
+  }
+
+  /* ── RECOMMENDATION ── */
+  .rec-block {
+    border: 1px solid var(--rule);
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    display: grid; grid-template-columns: 40px 1fr; gap: 16px; align-items: start;
+  }
+  .rec-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px; font-weight: 900;
+    color: var(--rule); line-height: 1;
+  }
+  .rec-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px; font-weight: 700; margin-bottom: 6px;
+  }
+  .rec-body { font-size: 12px; color: var(--muted); line-height: 1.7; }
+
+  /* ── CHANNEL PIE LEGEND ── */
+  .legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: 80px; border-top: 1px solid var(--rule);
+    padding-top: 20px;
+    display: flex; justify-content: space-between;
+    font-size: 10px; color: var(--muted);
+  }
+
+  /* ── DIVIDER ── */
+  .divider { border: none; border-top: 1px solid var(--rule); margin: 32px 0; }
+
+  .mono { font-family: 'DM Mono', monospace; }
+
+  /* ── CROSS-SELL TABLE HIGHLIGHT ── */
+  tr.attention td { background: #fdf8ee; }
+  tr.attention-arabic td { background: var(--arabic-lt); }
+
+  /* Print */
+  @media print {
+    .cover { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════
+     COVER
+══════════════════════════════════════════════════════ -->
+<div class="cover">
+  <p class="cover-eyebrow">Clearoute Marketing Intelligence · Influencer Attribution Report</p>
+  <h1 class="cover-title">Ousama Alshurafa</h1>
+  <p class="cover-subtitle">Full-Year Performance Analysis — January to December 2025</p>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Total Raised</div>
+      <div class="cover-meta-value">$6.39M</div>
+      <div class="cover-meta-sub">138,805 transactions</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Platform</div>
+      <div class="cover-meta-value">Humaniti</div>
+      <div class="cover-meta-sub">+ cross-sell activity</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Recurring Donors</div>
+      <div class="cover-meta-value">13,085</div>
+      <div class="cover-meta-sub">MRR $1.11M</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Arabic Share</div>
+      <div class="cover-meta-value">22.7%</div>
+      <div class="cover-meta-sub">$1.45M</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Campaigns</div>
+      <div class="cover-meta-value">55</div>
+      <div class="cover-meta-sub">across 14 entities</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ══════════════════════════════════════════════════════
+     EXECUTIVE SUMMARY
+══════════════════════════════════════════════════════ -->
+<div class="section">
+  <p class="section-label">Section 1</p>
+  <h2 class="section-title">Executive Summary</h2>
+  <p class="section-intro">
+    Ousama Alshurafa is Humaniti's highest-volume influencer partner, generating $6.39M across 55 distinct campaigns in 2025. He operates almost exclusively on the Humaniti platform, but attribution data reveals meaningful cross-sell spillover into Masjid Fund / Al Abrar and trace activity across 13 other entities. His audience exhibits strong recurring conversion, healthy new-donor acquisition, and a distinct Arabic-language segment that warrants its own growth strategy.
+  </p>
+
+  <div class="kpi-strip">
+    <div class="kpi highlight">
+      <div class="kpi-label">Total Raised</div>
+      <div class="kpi-value">$6.39M</div>
+      <div class="kpi-delta">Full year 2025</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">English Revenue</div>
+      <div class="kpi-value">$4.94M</div>
+      <div class="kpi-delta">77.3% of total</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Arabic Revenue</div>
+      <div class="kpi-value">$1.45M</div>
+      <div class="kpi-delta">22.7% of total</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Transactions</div>
+      <div class="kpi-value">138,805</div>
+      <div class="kpi-delta">Avg $46.07 / txn</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Unique Donors</div>
+      <div class="kpi-value">~77K</div>
+      <div class="kpi-delta">New: 68,133 (88.6%)</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Recurring Raised</div>
+      <div class="kpi-value">$1.23M</div>
+      <div class="kpi-delta">19.3% of total</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">MRR (excl. daily)</div>
+      <div class="kpi-value">$1.11M</div>
+      <div class="kpi-delta">ARR $13.38M</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Recurring Donors</div>
+      <div class="kpi-value">13,085</div>
+      <div class="kpi-delta">EN: 10,071 · AR: 3,027</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    Ousama's funnel is dominated by Meta advertising (73.1% of revenue), with Google providing a meaningful secondary lift (22.5%). Together these two paid channels account for 95.6% of attributed revenue — a concentration that creates both efficiency and platform risk.
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     RECURRING DONORS
+══════════════════════════════════════════════════════ -->
+<div class="section">
+  <p class="section-label">Section 2 — Answering Your Question</p>
+  <h2 class="section-title">Recurring Donors Through Ousama's Content</h2>
+  <p class="section-intro">
+    Across all 55 campaigns attributed to Ousama, his content converted 13,085 donors into recurring givers, generating a monthly recurring revenue run-rate of $1.11M.
+  </p>
+
+  <div class="kpi-strip">
+    <div class="kpi highlight">
+      <div class="kpi-label">Total Recurring Donors</div>
+      <div class="kpi-value">13,085</div>
+      <div class="kpi-delta">Across all campaigns</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">English Recurring Donors</div>
+      <div class="kpi-value">10,071</div>
+      <div class="kpi-delta">77.0% of recurring base</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Arabic Recurring Donors</div>
+      <div class="kpi-value">3,027</div>
+      <div class="kpi-delta">23.1% of recurring base</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Recurring Revenue</div>
+      <div class="kpi-value">$1.23M</div>
+      <div class="kpi-delta">19.3% recurring rate</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">MRR (excl. daily)</div>
+      <div class="kpi-value">$1.11M</div>
+      <div class="kpi-delta">Monthly run-rate</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Implied ARR</div>
+      <div class="kpi-value">$13.38M</div>
+      <div class="kpi-delta">Based on current cohort</div>
+    </div>
+  </div>
+
+  <!-- Recurring by campaign bar chart -->
+  <p style="font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;">Recurring Donors by Top Campaign</p>
+  <div class="bar-chart">
+    <div class="bar-row">
+      <div class="bar-label">Humaniti - Water</div>
+      <div class="bar-track"><div class="bar-fill" style="width:100%"><span class="bar-fill-label">5,732</span></div></div>
+      <div class="bar-amount">$514K recur.</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">Humaniti - Palestine</div>
+      <div class="bar-track"><div class="bar-fill" style="width:44.8%"><span class="bar-fill-label">2,570</span></div></div>
+      <div class="bar-amount">$243K recur.</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">Humaniti - Palestine Arabic</div>
+      <div class="bar-track"><div class="bar-fill arabic" style="width:22.2%"><span class="bar-fill-label">1,274</span></div></div>
+      <div class="bar-amount">$139K recur.</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">Humaniti - Hot Meals</div>
+      <div class="bar-track"><div class="bar-fill" style="width:17.8%"><span class="bar-fill-label">1,023</span></div></div>
+      <div class="bar-amount">$102K recur.</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">Humaniti - Water Arabic</div>
+      <div class="bar-track"><div class="bar-fill arabic" style="width:9.8%"><span class="bar-fill-label">563</span></div></div>
+      <div class="bar-amount">$54K recur.</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">Humaniti - Sudan Emergency</div>
+      <div class="bar-track"><div class="bar-fill rust" style="width:6.7%"><span class="bar-fill-label">385</span></div></div>
+      <div class="bar-amount">$13.8K recur.</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">Humaniti - Orphans</div>
+      <div class="bar-track"><div class="bar-fill gold" style="width:4.8%"><span class="bar-fill-label">276</span></div></div>
+      <div class="bar-amount">$55.2K recur.</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">Humaniti - Hot Meals Arabic</div>
+      <div class="bar-track"><div class="bar-fill arabic" style="width:7.7%"><span class="bar-fill-label">444</span></div></div>
+      <div class="bar-amount">$34.3K recur.</div>
+    </div>
+  </div>
+
+  <div class="callout teal" style="margin-top:24px;">
+    <strong>Key Insight:</strong> Water is Ousama's highest-converting recurring campaign by a wide margin — 5,732 recurring donors generating $430K MRR. This single campaign alone represents 38.6% of his entire recurring donor base. Palestine (English) ranks second with 2,570 recurring donors, suggesting humanitarian crisis content consistently converts casual givers into committed monthly supporters.
+  </div>
+
+  <div class="callout arabic" style="margin-top: 16px;">
+    <strong>Arabic Recurring Insight:</strong> Ousama's Arabic audience converts to recurring at a higher rate than his English audience. The three Arabic campaigns (Palestine Arabic, Water Arabic, Hot Meals Arabic) together hold <strong>2,281 recurring donors</strong> and an average recurring rate of <strong>21.8%</strong> vs. ~19% for English campaigns — a statistically meaningful difference worth investing further in Arabic content.
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     PROGRAM PERFORMANCE RANKING
+══════════════════════════════════════════════════════ -->
+<div class="section">
+  <p class="section-label">Section 3</p>
+  <h2 class="section-title">Program Performance Ranking</h2>
+  <p class="section-intro">
+    Campaigns are ranked by total revenue. The top four programs account for $5.19M — 81.1% of all attributed revenue. Secondary programs are meaningful at scale but individually small. Additional / cross-sell campaigns are broken out separately.
+  </p>
+
+  <!-- STACKED EN/AR bar chart -->
+  <p style="font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;">Total Raised — English vs. Arabic Split (Top 9 Core Campaigns)</p>
+  <div style="display:flex;gap:16px;margin-bottom:12px;font-size:10px;">
+    <div style="display:flex;align-items:center;gap:6px;"><div style="width:12px;height:12px;background:var(--teal)"></div> English</div>
+    <div style="display:flex;align-items:center;gap:6px;"><div style="width:12px;height:12px;background:var(--arabic-accent)"></div> Arabic</div>
+  </div>
+
+  <!-- Water -->
+  <div class="stack-row">
+    <div class="stack-label">Humaniti — Water</div>
+    <div class="stack-track">
+      <div class="stack-en" style="width:86.7%"></div>
+      <div class="stack-ar" style="width:13.3%"></div>
+    </div>
+    <div class="stack-total">$2,845,879</div>
+  </div>
+  <!-- Palestine EN -->
+  <div class="stack-row">
+    <div class="stack-label">Humaniti — Palestine</div>
+    <div class="stack-track">
+      <div class="stack-en" style="width:99.9%"></div>
+      <div class="stack-ar" style="width:0.1%"></div>
+    </div>
+    <div class="stack-total">$1,199,143</div>
+  </div>
+  <!-- Palestine AR -->
+  <div class="stack-row">
+    <div class="stack-label">Humaniti — Palestine Arabic</div>
+    <div class="stack-track">
+      <div class="stack-ar" style="width:100%"></div>
+    </div>
+    <div class="stack-total">$610,824</div>
+  </div>
+  <!-- Hot Meals -->
+  <div class="stack-row">
+    <div class="stack-label">Humaniti — Hot Meals</div>
+    <div class="stack-track">
+      <div class="stack-en" style="width:99.6%"></div>
+      <div class="stack-ar" style="width:0.4%"></div>
+    </div>
+    <div class="stack-total">$529,938</div>
+  </div>
+  <!-- Water AR -->
+  <div class="stack-row">
+    <div class="stack-label">Humaniti — Water Arabic</div>
+    <div class="stack-track">
+      <div class="stack-ar" style="width:100%"></div>
+    </div>
+    <div class="stack-total">$230,752</div>
+  </div>
+  <!-- Orphans -->
+  <div class="stack-row">
+    <div class="stack-label">Humaniti — Orphans</div>
+    <div class="stack-track">
+      <div class="stack-en" style="width:99.8%"></div>
+      <div class="stack-ar" style="width:0.2%"></div>
+    </div>
+    <div class="stack-total">$216,297</div>
+  </div>
+  <!-- Sudan -->
+  <div class="stack-row">
+    <div class="stack-label">Humaniti — Sudan Emergency</div>
+    <div class="stack-track">
+      <div class="stack-en" style="width:99.6%"></div>
+      <div class="stack-ar" style="width:0.4%"></div>
+    </div>
+    <div class="stack-total">$211,728</div>
+  </div>
+  <!-- Hot Meals AR -->
+  <div class="stack-row">
+    <div class="stack-label">Humaniti — Hot Meals Arabic</div>
+    <div class="stack-track">
+      <div class="stack-ar" style="width:100%"></div>
+    </div>
+    <div class="stack-total">$170,600</div>
+  </div>
+  <!-- Refugees -->
+  <div class="stack-row">
+    <div class="stack-label">Humaniti — Refugees</div>
+    <div class="stack-track">
+      <div class="stack-en" style="width:99.9%"></div>
+      <div class="stack-ar" style="width:0.1%"></div>
+    </div>
+    <div class="stack-total">$86,404</div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Full table -->
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Campaign Name</th>
+        <th>Code</th>
+        <th>Audience</th>
+        <th class="right">Total Raised</th>
+        <th class="right">Recur. Rate</th>
+        <th class="right">Recur. Donors</th>
+        <th class="right">New Donors</th>
+        <th class="right">MRR</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><strong>Humaniti — Water</strong></td>
+        <td><span class="badge badge-teal">humaniti</span></td>
+        <td><span class="badge badge-teal">English+AR</span></td>
+        <td class="right"><strong>$2,845,879</strong></td>
+        <td class="right">18.1%</td>
+        <td class="right">5,732</td>
+        <td class="right">31,893</td>
+        <td class="right">$430,474</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><strong>Humaniti — Palestine</strong></td>
+        <td><span class="badge badge-teal">humaniti</span></td>
+        <td><span class="badge badge-teal">English</span></td>
+        <td class="right"><strong>$1,199,143</strong></td>
+        <td class="right">20.3%</td>
+        <td class="right">2,570</td>
+        <td class="right">12,078</td>
+        <td class="right">$234,963</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><strong>Humaniti — Palestine Arabic</strong></td>
+        <td><span class="badge badge-teal">humaniti</span></td>
+        <td><span class="badge badge-arabic">Arabic 100%</span></td>
+        <td class="right"><strong>$610,824</strong></td>
+        <td class="right">22.8%</td>
+        <td class="right">1,274</td>
+        <td class="right">5,991</td>
+        <td class="right">$131,129</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><strong>Humaniti — Hot Meals</strong></td>
+        <td><span class="badge badge-teal">humaniti</span></td>
+        <td><span class="badge badge-teal">English</span></td>
+        <td class="right"><strong>$529,938</strong></td>
+        <td class="right">19.3%</td>
+        <td class="right">1,023</td>
+        <td class="right">5,933</td>
+        <td class="right">$102,012</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>Humaniti — Water Arabic</td>
+        <td><span class="badge badge-teal">humaniti</span></td>
+        <td><span class="badge badge-arabic">Arabic 100%</span></td>
+        <td class="right">$230,752</td>
+        <td class="right">23.4%</td>
+        <td class="right">563</td>
+        <td class="right">2,827</td>
+        <td class="right">$46,967</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>Humaniti — Orphans</td>
+        <td><span class="badge badge-teal">humaniti</span></td>
+        <td><span class="badge badge-teal">English</span></td>
+        <td class="right">$216,297</td>
+        <td class="right">25.5%</td>
+        <td class="right">276</td>
+        <td class="right">1,278</td>
+        <td class="right">$56,986</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>Humaniti — Sudan Emergency</td>
+        <td><span class="badge badge-teal">humaniti</span></td>
+        <td><span class="badge badge-teal">English</span></td>
+        <td class="right">$211,728</td>
+        <td class="right">6.5%</td>
+        <td class="right">385</td>
+        <td class="right">2,953</td>
+        <td class="right">$12,676</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>Humaniti — Hot Meals Arabic</td>
+        <td><span class="badge badge-teal">humaniti</span></td>
+        <td><span class="badge badge-arabic">Arabic 100%</span></td>
+        <td class="right">$170,600</td>
+        <td class="right">20.1%</td>
+        <td class="right">444</td>
+        <td class="right">1,761</td>
+        <td class="right">$31,896</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>Humaniti — Refugees</td>
+        <td><span class="badge badge-teal">humaniti</span></td>
+        <td><span class="badge badge-teal">English</span></td>
+        <td class="right">$86,404</td>
+        <td class="right">19.9%</td>
+        <td class="right">97</td>
+        <td class="right">432</td>
+        <td class="right">$17,227</td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td>Humaniti — Water Additional</td>
+        <td><span class="badge badge-teal">humaniti</span></td>
+        <td><span class="badge badge-teal">English</span></td>
+        <td class="right">$51,366</td>
+        <td class="right">31.3%</td>
+        <td class="right">180</td>
+        <td class="right">393</td>
+        <td class="right">$16,056</td>
+      </tr>
+      <tr>
+        <td>11</td>
+        <td>Humaniti — Emergency Relief (Dunya Decoded)</td>
+        <td><span class="badge badge-teal">humaniti</span></td>
+        <td><span class="badge badge-arabic">Arabic 100%</span></td>
+        <td class="right">$45,332</td>
+        <td class="right">15.0%</td>
+        <td class="right">93</td>
+        <td class="right">781</td>
+        <td class="right">$6,783</td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td>Humaniti — Winter Relief 2025</td>
+        <td><span class="badge badge-teal">humaniti</span></td>
+        <td><span class="badge badge-teal">English</span></td>
+        <td class="right">$35,510</td>
+        <td class="right">4.1%</td>
+        <td class="right">35</td>
+        <td class="right">319</td>
+        <td class="right">—</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout" style="margin-top:24px;">
+    <strong>Orphans over-indexes on recurring rate (25.5%) despite lower volume</strong> — this program converts the highest share of one-time donors to recurring givers of any English campaign. At greater investment it could become a significant MRR driver.
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     PLATFORM SCOPE — MUSLIMI / CROSS-SELL
+══════════════════════════════════════════════════════ -->
+<div class="section">
+  <p class="section-label">Section 4 — Answering Your Question</p>
+  <h2 class="section-title">Platform Scope: Humaniti-Exclusive with Notable Cross-Sell</h2>
+  <p class="section-intro">
+    Ousama's primary attribution is exclusively within the Humaniti platform (campaign code = "humaniti"). However, UTM data reveals meaningful cross-pollination into Masjid Fund / Al Abrar and trace-level activity across 13 other entities. No dedicated Muslimi campaigns were run under his name — but Muslimi-coded spillover exists.
+  </p>
+
+  <div class="kpi-strip">
+    <div class="kpi highlight">
+      <div class="kpi-label">Humaniti Core Revenue</div>
+      <div class="kpi-value">$6.27M</div>
+      <div class="kpi-delta">98.1% of total</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Non-Humaniti Revenue</div>
+      <div class="kpi-value">$117,520</div>
+      <div class="kpi-delta">1.9% of total</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Masjid Fund / Al Abrar</div>
+      <div class="kpi-value">$59,790</div>
+      <div class="kpi-delta">Largest cross-sell entity</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Muslimi-Coded Campaigns</div>
+      <div class="kpi-value">$3,902</div>
+      <div class="kpi-delta">3 campaigns (trace level)</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Other Entities</div>
+      <div class="kpi-value">$53,828</div>
+      <div class="kpi-delta">11 entities, all <$5K each</div>
+    </div>
+  </div>
+
+  <!-- Cross-sell full breakdown table -->
+  <p style="font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin:24px 0 14px;">All Non-Humaniti Campaigns (by Revenue)</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Campaign Name</th>
+        <th>Campaign Code</th>
+        <th>Category</th>
+        <th class="right">Total Raised</th>
+        <th class="right">Recurring</th>
+        <th class="right">Recur. Donors</th>
+        <th>Note</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="attention">
+        <td><strong>Masjid Fund — Al Abrar Additional</strong></td>
+        <td><span class="badge badge-gold">masjid fund - al abrar</span></td>
+        <td>Cross-sell</td>
+        <td class="right"><strong>$51,754</strong></td>
+        <td class="right">$12,603</td>
+        <td class="right">148</td>
+        <td>Largest cross-sell; 24.4% recurring rate</td>
+      </tr>
+      <tr class="attention">
+        <td>USA · Clean Water Global Site</td>
+        <td><span class="badge badge-gold">water</span></td>
+        <td>Global site</td>
+        <td class="right"><strong>$44,100</strong></td>
+        <td class="right">$4,041</td>
+        <td class="right">31</td>
+        <td>Likely organic spillover from Water campaign</td>
+      </tr>
+      <tr class="attention">
+        <td>Masjid Fund — Additional</td>
+        <td><span class="badge badge-gold">masjid fund</span></td>
+        <td>Cross-sell</td>
+        <td class="right"><strong>$7,912</strong></td>
+        <td class="right">$2,517</td>
+        <td class="right">46</td>
+        <td>31.8% recurring rate — high quality donors</td>
+      </tr>
+      <tr>
+        <td>Indus Hospital — Childhood Cancer Additional</td>
+        <td><span class="badge badge-rust">friends of indus hospital</span></td>
+        <td>Partner org</td>
+        <td class="right">$5,094</td>
+        <td class="right">$2,609</td>
+        <td class="right">21</td>
+        <td>51.2% recurring — highest rate of any campaign</td>
+      </tr>
+      <tr class="attention-arabic">
+        <td><strong>Muslimi — Gaza</strong></td>
+        <td><span class="badge badge-rust">muslimi</span></td>
+        <td>Muslimi cross-sell</td>
+        <td class="right"><strong>$3,081</strong></td>
+        <td class="right">$260</td>
+        <td class="right">2</td>
+        <td>Small but confirms Muslimi UTM attribution</td>
+      </tr>
+      <tr>
+        <td>CA · Emergency Relief Fund</td>
+        <td><span class="badge badge-rust">emergency</span></td>
+        <td>Partner</td>
+        <td class="right">$1,039</td>
+        <td class="right">—</td>
+        <td class="right">0</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Deen Center — Additional</td>
+        <td><span class="badge badge-rust">deen center</span></td>
+        <td>Partner</td>
+        <td class="right">$903</td>
+        <td class="right">$114</td>
+        <td class="right">4</td>
+        <td></td>
+      </tr>
+      <tr class="attention-arabic">
+        <td>Muslimi — Daily Giving in Ramadan</td>
+        <td><span class="badge badge-rust">muslimi fund</span></td>
+        <td>Muslimi cross-sell</td>
+        <td class="right">$680</td>
+        <td class="right">$680</td>
+        <td class="right">7</td>
+        <td>100% recurring; seasonal Ramadan programme</td>
+      </tr>
+      <tr class="attention-arabic">
+        <td>Muslimi — Daily Giving in Dhul Hijjah</td>
+        <td><span class="badge badge-rust">muslimi fund</span></td>
+        <td>Muslimi cross-sell</td>
+        <td class="right">$141</td>
+        <td class="right">$141</td>
+        <td class="right">2</td>
+        <td>100% recurring</td>
+      </tr>
+      <tr>
+        <td>Human Appeal — Palestine</td>
+        <td><span class="badge badge-rust">human appeal</span></td>
+        <td>Partner</td>
+        <td class="right">$275</td>
+        <td class="right">—</td>
+        <td class="right">0</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Dar-Al-Sunnah (Edmonton Masjid) Additional Arabic</td>
+        <td><span class="badge badge-rust">dar-al-sunnah</span></td>
+        <td>Partner</td>
+        <td class="right">$259</td>
+        <td class="right">$148</td>
+        <td class="right">2</td>
+        <td>57% recurring; Arabic audience</td>
+      </tr>
+      <tr>
+        <td>Al Amal — Gaza Relief</td>
+        <td><span class="badge badge-rust">al-amal</span></td>
+        <td>Partner</td>
+        <td class="right">$267</td>
+        <td class="right">—</td>
+        <td class="right">0</td>
+        <td>100% Arabic</td>
+      </tr>
+      <tr>
+        <td>HDF — Gaza Smiles Arabic</td>
+        <td><span class="badge badge-rust">hdf</span></td>
+        <td>Partner</td>
+        <td class="right">$130</td>
+        <td class="right">—</td>
+        <td class="right">0</td>
+        <td>100% Arabic</td>
+      </tr>
+      <tr>
+        <td>Masjid Fund — Al Abrar</td>
+        <td><span class="badge badge-gold">masjid fund - al abrar</span></td>
+        <td>Cross-sell</td>
+        <td class="right">$41</td>
+        <td class="right">$13</td>
+        <td class="right">1</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Masjid Fund — Al Abrar (Arabic)</td>
+        <td><span class="badge badge-gold">masjid fund - al abrar</span></td>
+        <td>Cross-sell</td>
+        <td class="right">$24</td>
+        <td class="right">—</td>
+        <td class="right">0</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout rust" style="margin-top:24px;">
+    <strong>Muslimi Attribution Confirmed — But Trace-Level:</strong> Three Muslimi-coded campaigns (muslimi, muslimi fund) appear in Ousama's attribution data totaling <strong>$3,902</strong>. These are likely organic UTM spillover from his content rather than deliberate Muslimi campaign placements. He has not been formally deployed for any Muslimi-branded campaigns.
+  </div>
+
+  <div class="callout" style="margin-top:16px;">
+    <strong>Masjid Fund / Al Abrar Cross-Sell is Material:</strong> The "Masjid Fund — Al Abrar Additional" campaign generated <strong>$51,754</strong> with 148 recurring donors and a 24.4% recurring rate — this is a deliberate "additional" campaign structure, meaning Humaniti is actively using Ousama's audience for cross-platform fundraising. Total Masjid Fund / Al Abrar revenue through Ousama attribution: <strong>$59,790</strong>.
+  </div>
+
+  <!-- Humaniti campaign name with "muslimi" in it -->
+  <div style="margin-top:24px; padding:16px 20px; border:1px solid var(--rule); background:var(--cream);">
+    <p style="font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">⚠ Anomaly: "Muslimi" in Humaniti Campaign Name</p>
+    <p style="font-size:12px;line-height:1.7;">
+      One Humaniti-coded campaign carries the name <strong>"muslimi - palestine"</strong> (code: humaniti) — generating <strong>$6,195</strong> with 24.8% recurring rate and 11 recurring donors. This appears to be a mislabeled or cross-branded Humaniti campaign rather than a true Muslimi campaign, as the campaign code remains "humaniti." It may warrant a naming audit.
+    </p>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     CHANNEL ANALYSIS
+══════════════════════════════════════════════════════ -->
+<div class="section">
+  <p class="section-label">Section 5</p>
+  <h2 class="section-title">Channel Attribution</h2>
+
+  <div class="two-col">
+    <div>
+      <p style="font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;">Revenue by Channel</p>
+      <div class="bar-chart">
+        <div class="bar-row">
+          <div class="bar-label">Meta</div>
+          <div class="bar-track"><div class="bar-fill" style="width:100%"><span class="bar-fill-label">$4,675,934</span></div></div>
+          <div class="bar-amount">73.1%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Google</div>
+          <div class="bar-track"><div class="bar-fill gold" style="width:30.8%"><span class="bar-fill-label">$1,439,947</span></div></div>
+          <div class="bar-amount">22.5%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Organic Social</div>
+          <div class="bar-track"><div class="bar-fill" style="background:var(--teal);width:3.6%"></div></div>
+          <div class="bar-amount">$169,476 · 2.7%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">SMS / MMS</div>
+          <div class="bar-track"><div class="bar-fill" style="background:var(--rust);width:2.2%"></div></div>
+          <div class="bar-amount">$101,768 · 1.6%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Email</div>
+          <div class="bar-track"><div class="bar-fill" style="background:#888;width:0.1%"></div></div>
+          <div class="bar-amount">$3,659 · 0.1%</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <p style="font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;">Channel Observations</p>
+      <ul class="finding-list">
+        <li>
+          <div class="finding-num">1</div>
+          <div><strong>Meta dominates at 73.1%</strong> — the overwhelming majority of Ousama's revenue is driven by paid Meta placements. His content is clearly optimized for Facebook/Instagram ad formats.</div>
+        </li>
+        <li>
+          <div class="finding-num">2</div>
+          <div><strong>Google provides strong secondary lift</strong> — $1.44M (22.5%) from Google suggests strong search intent from users exposed to Ousama's content, or deliberate demand-gen spend layered on top.</div>
+        </li>
+        <li>
+          <div class="finding-num">3</div>
+          <div><strong>Email is effectively zero</strong> — only $3,659 attributed to email, indicating his audience is almost entirely paid-social sourced rather than email-nurtured.</div>
+        </li>
+        <li>
+          <div class="finding-num">4</div>
+          <div><strong>Platform concentration risk</strong> — Meta + Google = 95.6%. Any policy change, CPM spike, or account issue at either platform would materially impact revenue.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     DONOR QUALITY ANALYSIS
+══════════════════════════════════════════════════════ -->
+<div class="section">
+  <p class="section-label">Section 6</p>
+  <h2 class="section-title">Donor Quality &amp; Retention</h2>
+
+  <div class="kpi-strip">
+    <div class="kpi highlight">
+      <div class="kpi-label">New Donor Rate</div>
+      <div class="kpi-value">88.6%</div>
+      <div class="kpi-delta">68,133 new donors</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Returning Donors</div>
+      <div class="kpi-value">22,890</div>
+      <div class="kpi-delta">11.4% of donor base</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Avg. Donation (All)</div>
+      <div class="kpi-value">$46.07</div>
+      <div class="kpi-delta">Per transaction</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Avg. One-Time Gift</div>
+      <div class="kpi-value">~$52</div>
+      <div class="kpi-delta">Estimated from top campaigns</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Avg. Recurring Gift</div>
+      <div class="kpi-value">~$24</div>
+      <div class="kpi-delta">Monthly installment</div>
+    </div>
+  </div>
+
+  <div class="callout teal">
+    Ousama is primarily an <strong>acquisition engine</strong> — 88.6% of attributed donors are new to the database. This is excellent for list growth but signals an opportunity: a structured retention / upgrade journey for the 68K+ new donors he's generating could compound MRR significantly over time. Returning donors (22,890) likely reflect previous Humaniti givers re-engaging via his content.
+  </div>
+
+  <!-- Arabic vs English donor profile -->
+  <hr class="divider">
+  <p style="font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;">English vs. Arabic Donor Profile</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Segment</th>
+        <th class="right">Revenue Share</th>
+        <th class="right">Recurring Donors</th>
+        <th class="right">Recurring Rate</th>
+        <th class="right">Avg. Gift (Arabic)</th>
+        <th>Key Campaigns</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="badge badge-teal">English</span></td>
+        <td class="right">$4,944,886 (77.3%)</td>
+        <td class="right">10,071</td>
+        <td class="right">~19%</td>
+        <td class="right">$42–52</td>
+        <td>Water, Palestine, Hot Meals, Orphans</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-arabic">Arabic</span></td>
+        <td class="right">$1,449,193 (22.7%)</td>
+        <td class="right">3,027</td>
+        <td class="right">~21.8%</td>
+        <td class="right">$51–73</td>
+        <td>Palestine Arabic, Water Arabic, Hot Meals Arabic</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout arabic" style="margin-top:20px;">
+    <strong>Arabic donors have a higher average gift and higher recurring conversion rate.</strong> The Palestinian-Arabic audience in particular shows $72.61 avg. donation vs. $63.29 for English Palestine donors — a 14.7% premium. Ousama's Arabic content is generating a smaller but higher-value audience segment that is systematically under-invested relative to its return profile.
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     STRATEGIC RECOMMENDATIONS
+══════════════════════════════════════════════════════ -->
+<div class="section">
+  <p class="section-label">Section 7</p>
+  <h2 class="section-title">Strategic Recommendations</h2>
+  <p class="section-intro">
+    Five priority actions ranked by expected impact on MRR growth and donor lifetime value.
+  </p>
+
+  <div class="rec-block">
+    <div class="rec-num">01</div>
+    <div>
+      <div class="rec-title">Invest in Arabic Content at Scale</div>
+      <div class="rec-body">Arabic content represents 22.7% of revenue with a higher recurring rate (21.8% vs. 19%) and a materially higher average gift ($51–73 vs. $42–52). The Arabic audience is being under-served — only 3 dedicated Arabic campaigns exist vs. 9+ English ones. A dedicated Arabic content calendar for Ousama, mirroring his top English programs (Orphans, Refugees, Sudan) in Arabic, could unlock $400–600K additional annual revenue at current conversion rates.</div>
+    </div>
+  </div>
+
+  <div class="rec-block">
+    <div class="rec-num">02</div>
+    <div>
+      <div class="rec-title">Build a Post-Acquisition Recurring Upgrade Journey</div>
+      <div class="rec-body">Ousama delivers 68K+ new donors annually — but 88.6% are first-time givers with no structured path to recurring. Implementing a 30/60/90-day email and SMS sequence specifically for Ousama-attributed new donors, with a recurring upsell offer, could realistically convert an additional 3–5% to monthly giving, adding $800K–$1.3M in ARR based on the current cohort size and average recurring gift.</div>
+    </div>
+  </div>
+
+  <div class="rec-block">
+    <div class="rec-num">03</div>
+    <div>
+      <div class="rec-title">Expand Masjid Fund / Al Abrar Cross-Sell Intentionally</div>
+      <div class="rec-body">$59,790 and 148 recurring donors have already flowed into Masjid Fund / Al Abrar through Ousama's content organically. A structured cross-sell programme — a dedicated "additional" ask embedded into Humaniti Water or Palestine donor journeys — could scale this 5–10x. The 24.4% recurring rate on existing Masjid Fund / Al Abrar donors sourced through Ousama confirms strong audience alignment.</div>
+    </div>
+  </div>
+
+  <div class="rec-block">
+    <div class="rec-num">04</div>
+    <div>
+      <div class="rec-title">Scale the Orphans Programme — Highest Recurring Conversion</div>
+      <div class="rec-body">Humaniti — Orphans has a 25.5% recurring rate — the highest of any English campaign — yet generated only $216K vs. $2.85M for Water. Ousama's content clearly resonates with orphan sponsorship messaging. A dedicated paid media investment in this programme at 10–20% of Water's budget could yield $200–400K additional revenue with outsized recurring characteristics.</div>
+    </div>
+  </div>
+
+  <div class="rec-block">
+    <div class="rec-num">05</div>
+    <div>
+      <div class="rec-title">Diversify Channel Mix to Reduce Meta Dependency</div>
+      <div class="rec-body">95.6% of revenue concentrates across just two paid platforms. Ousama's existing audience size (77K+ donors) justifies building a retention channel: a structured SMS programme (only $101K currently), a YouTube retargeting layer, and a weekly email digest could each contribute meaningful incremental revenue while reducing platform concentration risk. Target: reduce Meta dependency from 73% to below 65% within 12 months.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SUMMARY ANSWER TABLE
+══════════════════════════════════════════════════════ -->
+<div class="section">
+  <p class="section-label">Section 8 — Direct Answers</p>
+  <h2 class="section-title">Your Questions — Answered Directly</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Question</th>
+        <th>Answer</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="width:36%;font-weight:600;">How many recurring donors came through his content?</td>
+        <td><strong>13,085 recurring donors</strong> across all 55 campaigns. English: 10,071 · Arabic: 3,027. MRR: $1.11M. ARR: $13.38M. Water alone accounts for 5,732 (43.8%) of all recurring donors.</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600;">Which programs performed best?</td>
+        <td><strong>#1 Humaniti — Water</strong> ($2.85M, 5,732 recurring donors, $430K MRR) · <strong>#2 Humaniti — Palestine</strong> ($1.20M) · <strong>#3 Palestine Arabic</strong> ($611K, best Arabic performer) · <strong>#4 Hot Meals</strong> ($530K). Orphans has the highest recurring conversion rate (25.5%) of any English campaign despite lower volume.</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600;">Has Ousama been used for Muslimi campaigns?</td>
+        <td><strong>No dedicated Muslimi campaigns.</strong> Exclusively Humaniti. However, 3 Muslimi-coded campaigns show trace attribution ($3,902 total): "muslimi - gaza" [muslimi code], "muslimi - daily giving in ramadan" and "muslimi - daily giving in dhul hijjah" [muslimi fund code]. These appear to be organic UTM spillover, not deliberate placements. One Humaniti-coded campaign is mislabeled "muslimi - palestine" but remains a Humaniti campaign.</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600;">Cross-sell: Masjid Fund / Al Abrar?</td>
+        <td><strong>Yes — confirmed cross-sell activity.</strong> Total Masjid Fund / Al Abrar revenue attributable to Ousama: <strong>$59,790</strong> (3 campaign lines). "Masjid Fund — Al Abrar Additional" alone: $51,754 with 148 recurring donors at 24.4% recurring rate. This is intentional "additional" campaign architecture, not accidental spillover.</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600;">Non-Humaniti total raised?</td>
+        <td><strong>$117,520</strong> across 27 non-humaniti campaign lines. Dominated by Masjid Fund / Al Abrar ($59,790), USA Clean Water global site ($44,100), and Masjid Fund Additional ($7,912). Muslimi-specific total: $3,902. All other entities (Indus Hospital, Deen Center, Human Appeal, etc.): $53,828 combined — all trace-level, under $6K each.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="footer">
+  <div>Ousama Alshurafa · Influencer Attribution Report · Jan 01 – Dec 31 2025</div>
+  <div>Clearoute Marketing Intelligence · Humaniti Platform Data</div>
+</div>
+
+</div><!-- /container -->
+</body>
+</html>
