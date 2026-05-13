@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Black background -->
+  <rect width="512" height="512" fill="#0f0f0f"/>
+  <!-- Gold circle -->
+  <circle cx="258" cy="256" r="253" fill="#c49a3c"/>
+  <!-- Gold right rectangle strip -->
+  <rect x="256" y="0" width="250" height="512" fill="#c49a3c"/>
+  <!-- Black chevron upper arm -->
+  <polygon points="361,64 512,64 512,148 443,256 512,256 512,323 253,64" fill="#0f0f0f"/>
+  <!-- Black chevron lower arm -->
+  <polygon points="253,448 512,341 512,448 443,256 512,256 512,189 361,448" fill="#0f0f0f"/>
+  <!-- Black border 6px -->
+  <rect x="0" y="0" width="512" height="6" fill="#0f0f0f"/>
+  <rect x="0" y="506" width="512" height="6" fill="#0f0f0f"/>
+  <rect x="0" y="0" width="6" height="512" fill="#0f0f0f"/>
+  <rect x="506" y="0" width="6" height="512" fill="#0f0f0f"/>
+</svg>

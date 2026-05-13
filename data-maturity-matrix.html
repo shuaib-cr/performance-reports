@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Data Practice Maturity Matrix — Stage × Capability × Tooling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=JetBrains+Mono:wght@400;500;700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:        #0d0d0f;
+    --ink-soft:   #1a1a1f;
+    --paper:      #f4efe6;
+    --paper-2:    #e9e2d2;
+    --paper-3:    #d9cfb8;
+    --rule:       #2b2b30;
+    --rule-soft:  #b7ad97;
+    --accent:     #d94a1f;
+    --accent-2:   #1e5a4a;
+    --accent-3:   #c9a44a;
+    --accent-4:   #4b3aa8;
+    --accent-5:   #8a2244;
+
+    --display: "Fraunces", Georgia, serif;
+    --body:    "Inter Tight", system-ui, sans-serif;
+    --mono:    "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--paper); color: var(--ink); font-family: var(--body); -webkit-font-smoothing: antialiased; }
+  body {
+    background-image:
+      radial-gradient(circle at 12% 8%, rgba(217,74,31,0.06), transparent 40%),
+      radial-gradient(circle at 88% 92%, rgba(30,90,74,0.05), transparent 45%);
+  }
+
+  .topbar {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 22px 40px 18px;
+    border-bottom: 1px solid var(--rule);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .topbar .left { display: flex; gap: 28px; flex-wrap: wrap; }
+  .topbar .right { color: var(--ink-soft); opacity: 0.7; }
+  .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); margin-right: 6px; transform: translateY(-1px); }
+
+  header {
+    padding: 56px 40px 36px;
+    border-bottom: 1px solid var(--rule);
+  }
+  header .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 22px;
+  }
+  header h1 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(44px, 7.5vw, 108px);
+    line-height: 0.92;
+    letter-spacing: -0.025em;
+    max-width: 18ch;
+  }
+  header h1 em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--accent);
+  }
+  header h1 .underline {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 8px;
+    text-decoration-color: var(--accent-3);
+  }
+  header .deck {
+    margin-top: 32px;
+    max-width: 70ch;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  header .meta {
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    border-top: 1px solid var(--rule-soft);
+    padding-top: 24px;
+    font-family: var(--mono);
+    font-size: 12px;
+  }
+  header .meta div span {
+    display: block;
+    color: var(--accent);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .section-head {
+    padding: 64px 40px 24px;
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
+    border-top: 1px solid var(--rule);
+  }
+  .section-head .num {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+  }
+  .section-head h2 {
+    font-family: var(--display);
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .section-head .rule {
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+    margin-bottom: 8px;
+  }
+  .section-intro {
+    padding: 0 40px 32px;
+    max-width: 78ch;
+    color: var(--ink-soft);
+    font-size: 15.5px;
+    line-height: 1.6;
+  }
+
+  .stage-strip {
+    margin: 0 40px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border: 1px solid var(--rule);
+    background: var(--paper-2);
+  }
+  .stage-cell {
+    padding: 22px 20px;
+    border-right: 1px solid var(--rule-soft);
+  }
+  .stage-cell:last-child { border-right: none; }
+  .stage-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .stage-name {
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+    margin-bottom: 8px;
+  }
+  .stage-meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .stage-bar {
+    height: 4px;
+    background: var(--rule-soft);
+    margin-top: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  .stage-bar::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    background: var(--accent);
+  }
+  .stage-cell:nth-child(1) .stage-bar::after { width: 20%; }
+  .stage-cell:nth-child(2) .stage-bar::after { width: 40%; }
+  .stage-cell:nth-child(3) .stage-bar::after { width: 60%; }
+  .stage-cell:nth-child(4) .stage-bar::after { width: 80%; }
+  .stage-cell:nth-child(5) .stage-bar::after { width: 100%; background: var(--accent-3); }
+
+  .matrix-wrap {
+    margin: 32px 40px 0;
+    overflow-x: auto;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  table.matrix {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1200px;
+    font-size: 13px;
+  }
+  table.matrix thead th {
+    background: var(--ink);
+    color: var(--paper);
+    text-align: left;
+    padding: 16px 14px;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 500;
+    border-right: 1px solid var(--ink-soft);
+    vertical-align: top;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+  }
+  table.matrix thead th:first-child {
+    width: 200px;
+    background: var(--accent);
+    position: sticky;
+    left: 0;
+    z-index: 6;
+  }
+  table.matrix thead th .stagenum {
+    display: block;
+    color: var(--accent-3);
+    font-size: 10px;
+    margin-bottom: 4px;
+  }
+  table.matrix thead th:first-child .stagenum { color: var(--paper); }
+  table.matrix thead th .stagetitle {
+    font-family: var(--display);
+    font-size: 16px;
+    letter-spacing: -0.01em;
+    text-transform: none;
+    font-weight: 500;
+    font-style: italic;
+  }
+  table.matrix tbody td {
+    padding: 16px 14px;
+    border-right: 1px solid var(--rule-soft);
+    border-bottom: 1px solid var(--rule-soft);
+    vertical-align: top;
+    background: var(--paper);
+    line-height: 1.5;
+  }
+  table.matrix tbody td.cap {
+    background: var(--paper-2);
+    border-right: 2px solid var(--rule);
+    position: sticky;
+    left: 0;
+    z-index: 4;
+    width: 200px;
+  }
+  table.matrix tbody td.cap .cap-name {
+    font-family: var(--display);
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    margin-bottom: 6px;
+  }
+  table.matrix tbody td.cap .cap-meta {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  table.matrix tbody td .cell-state {
+    font-weight: 600;
+    color: var(--ink);
+    display: block;
+    margin-bottom: 6px;
+    font-size: 13px;
+  }
+  table.matrix tbody td .cell-detail {
+    color: var(--ink-soft);
+    font-size: 12.5px;
+  }
+  table.matrix tbody td .cell-tools {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--rule-soft);
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--accent-2);
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+  }
+  table.matrix tbody td .cell-tools::before {
+    content: '↳ ';
+    color: var(--accent);
+  }
+
+  .mdot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-right: 4px;
+    background: var(--rule-soft);
+  }
+  .mdot.on { background: var(--accent); }
+  .mdots {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 8px;
+  }
+
+  .timeline-wrap {
+    margin: 0 40px;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    padding: 32px;
+  }
+  .timeline-axis {
+    position: relative;
+    height: 60px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 32px;
+  }
+  .timeline-axis .tick {
+    position: absolute;
+    bottom: -8px;
+    width: 1px;
+    height: 14px;
+    background: var(--ink);
+  }
+  .timeline-axis .tick-label {
+    position: absolute;
+    bottom: -32px;
+    transform: translateX(-50%);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink);
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .timeline-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .timeline-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    align-items: center;
+    gap: 16px;
+  }
+  .timeline-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-align: right;
+    padding-right: 12px;
+    border-right: 1px solid var(--rule-soft);
+  }
+  .timeline-bar-track {
+    position: relative;
+    height: 30px;
+    background: var(--paper-2);
+    border: 1px solid var(--rule-soft);
+  }
+  .timeline-bar {
+    position: absolute;
+    top: 4px; bottom: 4px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .timeline-bar.essential { background: var(--accent); }
+  .timeline-bar.recommended { background: var(--accent-2); }
+  .timeline-bar.scale { background: var(--accent-4); }
+  .timeline-bar.optional { background: var(--paper-3); color: var(--ink); border: 1px solid var(--rule); }
+
+  .legend {
+    display: flex;
+    gap: 24px;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule-soft);
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    flex-wrap: wrap;
+  }
+  .legend .swatch {
+    display: inline-block;
+    width: 18px; height: 10px;
+    margin-right: 8px;
+    transform: translateY(1px);
+  }
+
+  .compare-grid {
+    margin: 0 40px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .compare-card {
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .compare-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    background: var(--accent);
+  }
+  .compare-card:nth-child(2)::before { background: var(--accent-2); }
+  .compare-card:nth-child(3)::before { background: var(--accent-4); }
+
+  .compare-card h3 {
+    font-family: var(--display);
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+    font-style: italic;
+  }
+  .compare-card .archetype {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .compare-card dl {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 8px 14px;
+    font-size: 12.5px;
+  }
+  .compare-card dt {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding-top: 2px;
+  }
+  .compare-card dd {
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .compare-card .signature {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--rule-soft);
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  .principles {
+    margin: 0 40px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border: 1px solid var(--rule);
+  }
+  .principle {
+    padding: 32px 28px;
+    border-right: 1px solid var(--rule-soft);
+    border-bottom: 1px solid var(--rule-soft);
+    position: relative;
+  }
+  .principle:nth-child(2n) { border-right: none; }
+  .principle:nth-last-child(-n+2) { border-bottom: none; }
+  .principle .pnum {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 60px;
+    font-weight: 300;
+    color: var(--accent);
+    line-height: 0.8;
+    position: absolute;
+    top: 20px; right: 24px;
+    opacity: 0.7;
+  }
+  .principle h4 {
+    font-family: var(--display);
+    font-size: 21px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+    max-width: 80%;
+    line-height: 1.15;
+  }
+  .principle p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+
+  footer {
+    margin-top: 80px;
+    padding: 40px;
+    border-top: 1px solid var(--rule);
+    background: var(--ink);
+    color: var(--paper);
+  }
+  footer .ftop {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  footer .mark {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 32px;
+    font-weight: 400;
+  }
+  footer .mark em { color: var(--accent-3); font-weight: 300; }
+  footer .fmeta {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--paper-3);
+  }
+  footer .colophon {
+    font-size: 13px;
+    line-height: 1.65;
+    max-width: 75ch;
+    color: var(--paper-2);
+    opacity: 0.85;
+  }
+
+  .callout {
+    margin: 32px 40px 0;
+    padding: 24px 28px;
+    background: var(--ink);
+    color: var(--paper);
+    position: relative;
+    border-left: 5px solid var(--accent-3);
+  }
+  .callout .clabel {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-3);
+    margin-bottom: 10px;
+  }
+  .callout p {
+    font-family: var(--display);
+    font-size: 18px;
+    line-height: 1.45;
+    font-weight: 400;
+    font-style: italic;
+    max-width: 80ch;
+  }
+
+  @media (max-width: 1000px) {
+    header, .section-head, .section-intro, .matrix-wrap, .stage-strip, .timeline-wrap, .compare-grid, .principles, .callout, footer { margin-left: 20px; margin-right: 20px; }
+    header, .section-head, .section-intro, footer { padding-left: 20px; padding-right: 20px; }
+    .stage-strip, .compare-grid, .principles { grid-template-columns: 1fr; }
+    header .meta { grid-template-columns: repeat(2, 1fr); }
+    .principle { border-right: none; }
+    .timeline-row { grid-template-columns: 120px 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="left">
+    <span><span class="dot"></span>FIELD GUIDE</span>
+    <span>VOL. 01 / ISSUE 02</span>
+    <span>FOR DATA / ML / PLATFORM LEADERS</span>
+  </div>
+  <div class="right">PRESS-RUN 2026</div>
+</div>
+
+<header>
+  <div class="eyebrow">A capability-by-stage atlas of how leading data orgs are built</div>
+  <h1>
+    The <em>Data Practice</em><br/>
+    Maturity <span class="underline">Matrix</span>
+  </h1>
+  <p class="deck">
+    A reference for understanding which data capabilities — analytics, governance, ML, infrastructure — belong at which stage of company growth, and the tooling that should arrive (or be deferred) at each step. Calibrated against patterns observed at OpenAI, Anthropic, Databricks, Netflix, Airbnb, Uber, and Stripe, then compressed into a single navigable grid.
+  </p>
+  <div class="meta">
+    <div><span>Coverage</span>8 capability dimensions</div>
+    <div><span>Stages</span>5 maturity tiers (Seed → AI-native scale)</div>
+    <div><span>Tools mapped</span>~80 across the modern stack</div>
+    <div><span>Use as</span>Hiring plan + tooling roadmap</div>
+  </div>
+</header>
+
+<div class="section-head">
+  <div class="num">§ 01</div>
+  <h2>The five stages of data maturity</h2>
+  <div class="rule"></div>
+</div>
+<p class="section-intro">
+  Company size is a weak proxy for data maturity — a 5,000-person bank can sit at Stage 1 while a 40-person AI lab operates at Stage 4. The lens that actually matters: <em>how well does this org understand the past, monitor the present, and forecast the future using data?</em> The five stages below progress along that axis.
+</p>
+
+<div class="stage-strip">
+  <div class="stage-cell">
+    <div class="stage-num">STAGE 00</div>
+    <div class="stage-name">Reactive</div>
+    <div class="stage-meta">Pre-Series A · &lt;25 people · Ad-hoc SQL, founder dashboards, no dedicated data hire</div>
+    <div class="stage-bar"></div>
+  </div>
+  <div class="stage-cell">
+    <div class="stage-num">STAGE 01</div>
+    <div class="stage-name">Repeatable</div>
+    <div class="stage-meta">Series A–B · 25–150 people · First data hire(s), warehouse stood up, dashboards consolidated</div>
+    <div class="stage-bar"></div>
+  </div>
+  <div class="stage-cell">
+    <div class="stage-num">STAGE 02</div>
+    <div class="stage-name">Defined</div>
+    <div class="stage-meta">Series B–C · 150–500 people · Specialized roles, metric layer, first ML in production</div>
+    <div class="stage-bar"></div>
+  </div>
+  <div class="stage-cell">
+    <div class="stage-num">STAGE 03</div>
+    <div class="stage-name">Managed</div>
+    <div class="stage-meta">Series C–pre-IPO · 500–2,500 people · Federated/embedded teams, formal governance, ML platform</div>
+    <div class="stage-bar"></div>
+  </div>
+  <div class="stage-cell">
+    <div class="stage-num">STAGE 04</div>
+    <div class="stage-name">Optimized</div>
+    <div class="stage-meta">Public / hyperscale · 2,500+ people · Data mesh / products, CDO, treasury-grade controls</div>
+    <div class="stage-bar"></div>
+  </div>
+</div>
+
+<div class="callout">
+  <div class="clabel">Read this first</div>
+  <p>The most expensive mistakes happen when teams adopt Stage 03 tooling at Stage 01 maturity, or staff Stage 04 roles before the organization can absorb them. Use the matrix to find your true row, then look one column to the right — that is your next 12 months.</p>
+</div>
+
+<div class="section-head">
+  <div class="num">§ 02</div>
+  <h2>Capability × stage, with tooling</h2>
+  <div class="rule"></div>
+</div>
+<p class="section-intro">
+  Eight capability rows, each tracked across the five stages. Every cell shows the state of the capability at that stage, plus the tools you'd typically see introduced. Tools listed under "↳" are the <em>new arrivals</em> at that stage; assume earlier-stage tools persist unless explicitly replaced.
+</p>
+
+<div class="matrix-wrap">
+<table class="matrix">
+<thead>
+<tr>
+  <th>Capability</th>
+  <th><span class="stagenum">00 · REACTIVE</span><span class="stagetitle">Founders &amp; SQL</span></th>
+  <th><span class="stagenum">01 · REPEATABLE</span><span class="stagetitle">First data hire</span></th>
+  <th><span class="stagenum">02 · DEFINED</span><span class="stagetitle">Specialized team</span></th>
+  <th><span class="stagenum">03 · MANAGED</span><span class="stagetitle">Federated &amp; governed</span></th>
+  <th><span class="stagenum">04 · OPTIMIZED</span><span class="stagetitle">Data as a product</span></th>
+</tr>
+</thead>
+<tbody>
+
+<tr>
+  <td class="cap">
+    <div class="cap-name">Org structure &amp; roles</div>
+    <div class="cap-meta">Who owns data</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot"></span><span class="mdot"></span><span class="mdot"></span><span class="mdot"></span></div>
+    <span class="cell-state">Founder or eng lead moonlights as analyst</span>
+    <span class="cell-detail">SQL queries written by whoever needs the answer. No dedicated data person.</span>
+    <div class="cell-tools">Stakeholders own their own queries</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot"></span><span class="mdot"></span><span class="mdot"></span></div>
+    <span class="cell-state">First analytics engineer or analyst (T-shaped generalist)</span>
+    <span class="cell-detail">Reports to founder/CTO. Owns ingestion, modeling, dashboards, ad-hoc. Centralized model is correct here.</span>
+    <div class="cell-tools">1 person, reports to CEO or CTO</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot"></span><span class="mdot"></span></div>
+    <span class="cell-state">Specialized roles emerge: DE, Analytics Eng, Analyst, first DS</span>
+    <span class="cell-detail">Still centralized, ~5–15 people. Head of Data reports to CTO/COO. ML hires only if there's a clear product use case.</span>
+    <div class="cell-tools">Centralized team, single backlog</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot"></span></div>
+    <span class="cell-state">Hub-and-spoke / embedded model with platform team</span>
+    <span class="cell-detail">Central platform team owns infra + standards. Analysts/DS embedded in product, finance, growth. VP Data or first CDO.</span>
+    <div class="cell-tools">Platform team + embedded pods</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span></div>
+    <span class="cell-state">Data mesh / data products with Data Product Managers</span>
+    <span class="cell-detail">Domain teams own data products; central body sets interop standards. CDO at exec table. Data Product Owners and Architects.</span>
+    <div class="cell-tools">Federated mesh + central CoE</div>
+  </td>
+</tr>
+
+<tr>
+  <td class="cap">
+    <div class="cap-name">Analytics &amp; BI</div>
+    <div class="cap-meta">Descriptive layer</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot"></span><span class="mdot"></span><span class="mdot"></span><span class="mdot"></span></div>
+    <span class="cell-state">Spreadsheets, app-native dashboards</span>
+    <span class="cell-detail">Stripe MRR view, GA dashboard, Hubspot reports. Numbers conflict between tools and nobody notices.</span>
+    <div class="cell-tools">Google Sheets · Stripe Sigma · GA4 · in-app dashboards</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot"></span><span class="mdot"></span><span class="mdot"></span></div>
+    <span class="cell-state">Single BI tool, one source of truth for the top 10 KPIs</span>
+    <span class="cell-detail">Self-serve dashboards for execs. Ad-hoc SQL still dominates. Definitions drift across teams.</span>
+    <div class="cell-tools">Metabase · Hex · Mode · Preset (Superset)</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot"></span><span class="mdot"></span></div>
+    <span class="cell-state">Self-serve BI, certified dashboards, semantic / metrics layer</span>
+    <span class="cell-detail">A central metrics definition (MRR, churn, DAU) used by every tool. Analysts unblock themselves.</span>
+    <div class="cell-tools">Looker · Lightdash · Cube · dbt Semantic Layer</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot"></span></div>
+    <span class="cell-state">Headless BI, embedded analytics in product, AI-assisted queries</span>
+    <span class="cell-detail">Metrics layer powers external customer dashboards too. Natural-language querying in BI tools.</span>
+    <div class="cell-tools">Tableau · Looker + LookML · Sigma · ThoughtSpot · Hex Magic</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span></div>
+    <span class="cell-state">Agent-driven analytics, decision intelligence platforms</span>
+    <span class="cell-detail">Analytics flows into operational loops automatically. AI agents author + ship insights with human review.</span>
+    <div class="cell-tools">Custom internal BI · Hex/Sigma agents · MCP-connected analytics</div>
+  </td>
+</tr>
+
+<tr>
+  <td class="cap">
+    <div class="cap-name">Warehouse &amp; storage</div>
+    <div class="cap-meta">Compute layer</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot"></span><span class="mdot"></span><span class="mdot"></span><span class="mdot"></span></div>
+    <span class="cell-state">Production Postgres for everything</span>
+    <span class="cell-detail">Analytics queries run against the production DB. Long queries crash the app. Don't stay here long.</span>
+    <div class="cell-tools">Postgres · MySQL · Supabase</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot"></span><span class="mdot"></span><span class="mdot"></span></div>
+    <span class="cell-state">Separate cloud warehouse, ELT</span>
+    <span class="cell-detail">Operational DB ≠ analytics DB. Single warehouse, cheap compute. The most leveraged decision an early team makes.</span>
+    <div class="cell-tools">BigQuery · Snowflake · Redshift · DuckDB (small data)</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot"></span><span class="mdot"></span></div>
+    <span class="cell-state">Warehouse + object storage for semi-structured / ML data</span>
+    <span class="cell-detail">Parquet/JSON in S3/GCS for ML training sets, logs, embeddings. Warehouse-native semi-structured types in use.</span>
+    <div class="cell-tools">Snowflake + S3 · BigQuery + GCS · Iceberg/Delta tables</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot"></span></div>
+    <span class="cell-state">Lakehouse architecture, open table formats, multi-region</span>
+    <span class="cell-detail">Compute decoupled from storage. Iceberg/Delta lets multiple engines (warehouse, Spark, query engine) read the same data.</span>
+    <div class="cell-tools">Databricks Lakehouse · Snowflake + Iceberg · Trino/Starburst · Apache Iceberg</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span></div>
+    <span class="cell-state">Multi-engine open lakehouse, treasury-grade FinOps</span>
+    <span class="cell-detail">Petabyte-scale, multi-cloud, with cost attribution per team/product. Custom internal platforms common at this scale.</span>
+    <div class="cell-tools">Iceberg + multi-engine · custom Spark/Ray fleets · in-house storage (Netflix, Uber-style)</div>
+  </td>
+</tr>
+
+<tr>
+  <td class="cap">
+    <div class="cap-name">Ingestion &amp; transformation</div>
+    <div class="cap-meta">ETL/ELT, orchestration</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot"></span><span class="mdot"></span><span class="mdot"></span><span class="mdot"></span></div>
+    <span class="cell-state">CSV exports, manual scripts</span>
+    <span class="cell-detail">Engineer writes a cron job to dump tables to a folder. Brittle, undocumented.</span>
+    <div class="cell-tools">cron · Python scripts · CSV exports</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot"></span><span class="mdot"></span><span class="mdot"></span></div>
+    <span class="cell-state">Managed ELT + SQL transformations</span>
+    <span class="cell-detail">Connectors load raw data, dbt transforms it. Scheduled via dbt Cloud or simple cron. Don't overbuild orchestration yet.</span>
+    <div class="cell-tools">Fivetran · Airbyte · Stitch · dbt Core/Cloud</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot"></span><span class="mdot"></span></div>
+    <span class="cell-state">Real orchestrator, CDC, streaming for hot paths</span>
+    <span class="cell-detail">DAGs, dependencies, retries. Change-data-capture from prod DBs. Kafka for event streams where latency matters.</span>
+    <div class="cell-tools">Airflow · Dagster · Prefect · Estuary · Confluent/Kafka</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot"></span></div>
+    <span class="cell-state">Asset-based orchestration, declarative pipelines, streaming-first</span>
+    <span class="cell-detail">Pipelines treated as data assets with contracts. Reverse-ETL pushes analytics back into operational tools.</span>
+    <div class="cell-tools">Dagster (asset graph) · Flink · Spark Structured Streaming · Hightouch · Census</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span></div>
+    <span class="cell-state">In-house platform, sub-second SLAs, agentic pipeline authoring</span>
+    <span class="cell-detail">Bespoke schedulers (Airflow at Airbnb, Cadence at Uber). AI assists in writing/repairing pipelines.</span>
+    <div class="cell-tools">Custom orchestration · in-house CDC · Airflow at FAANG-scale</div>
+  </td>
+</tr>
+
+<tr>
+  <td class="cap">
+    <div class="cap-name">Governance, quality &amp; lineage</div>
+    <div class="cap-meta">Trust layer</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot"></span><span class="mdot"></span><span class="mdot"></span><span class="mdot"></span></div>
+    <span class="cell-state">None</span>
+    <span class="cell-detail">Two dashboards disagree, no one knows which is right. Acceptable at &lt;20 people; intolerable at 50.</span>
+    <div class="cell-tools">—</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot"></span><span class="mdot"></span><span class="mdot"></span></div>
+    <span class="cell-state">In-pipeline tests, README-as-catalog</span>
+    <span class="cell-detail">dbt tests for not-null, unique, accepted-values. Documentation lives in dbt docs. No formal catalog yet.</span>
+    <div class="cell-tools">dbt tests · dbt docs · Great Expectations (light)</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot"></span><span class="mdot"></span></div>
+    <span class="cell-state">Data catalog, basic lineage, freshness/volume alerts</span>
+    <span class="cell-detail">Analysts can discover tables and trust their definitions. Lineage shows what breaks if a column is renamed.</span>
+    <div class="cell-tools">Atlan · Secoda · Castor · Monte Carlo · Bigeye · Elementary</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot"></span></div>
+    <span class="cell-state">Data contracts, column-level lineage, PII tagging, access policies</span>
+    <span class="cell-detail">Producers commit to schemas; breaking changes blocked at CI. Stewards per domain. SOC2 / HIPAA evidence automated.</span>
+    <div class="cell-tools">Unity Catalog · OpenMetadata · Collibra · Immuta · Privacera · OpenLineage</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span></div>
+    <span class="cell-state">Active metadata, real-time policy enforcement, AI explainability</span>
+    <span class="cell-detail">Governance is code. Catalogs surface trust signals in the BI/notebook tool itself. Regulator-ready audit trails.</span>
+    <div class="cell-tools">Custom catalogs · Atlan + MCP · Alation · Informatica IDMC · in-house policy engines</div>
+  </td>
+</tr>
+
+<tr>
+  <td class="cap">
+    <div class="cap-name">ML / AI capabilities</div>
+    <div class="cap-meta">Models in production</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot"></span><span class="mdot"></span><span class="mdot"></span><span class="mdot"></span></div>
+    <span class="cell-state">None or off-the-shelf API calls</span>
+    <span class="cell-detail">Calling OpenAI/Anthropic APIs from app code. No training, no eval, no monitoring.</span>
+    <div class="cell-tools">Foundation model APIs · prompt-as-config</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot"></span><span class="mdot"></span><span class="mdot"></span></div>
+    <span class="cell-state">First production ML model — usually one critical use case</span>
+    <span class="cell-detail">Churn model, recommendation, fraud score. Often a notebook deployed via Flask/FastAPI. RAG over docs for GenAI orgs.</span>
+    <div class="cell-tools">scikit-learn · XGBoost · Hugging Face · LangChain · LlamaIndex · OpenAI/Anthropic SDKs</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot"></span><span class="mdot"></span></div>
+    <span class="cell-state">Experiment tracking, model registry, basic eval harness</span>
+    <span class="cell-detail">First MLOps surface area. A/B testing infra. GenAI teams build prompt regression and offline eval suites.</span>
+    <div class="cell-tools">MLflow · Weights &amp; Biases · Vertex AI · SageMaker · Braintrust · LangSmith · Statsig/Eppo</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot"></span></div>
+    <span class="cell-state">Full ML platform: feature store, training infra, serving, monitoring</span>
+    <span class="cell-detail">Dozens of models in prod. Feature reuse across teams. LLM gateway, eval pipelines, RAG infrastructure, agent frameworks.</span>
+    <div class="cell-tools">Databricks Mosaic · Tecton · Feast · Ray · Pinecone/Weaviate · Anthropic+OpenAI via gateway · vLLM</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span></div>
+    <span class="cell-state">In-house ML platform, custom training stacks, agent fleets</span>
+    <span class="cell-detail">Michelangelo (Uber), Zipline (Airbnb), Metaflow (Netflix) — bespoke. Frontier labs train foundation models in-house.</span>
+    <div class="cell-tools">Custom platforms · in-house GPU clusters · Ray at scale · custom eval frameworks · proprietary RLHF stacks</div>
+  </td>
+</tr>
+
+<tr>
+  <td class="cap">
+    <div class="cap-name">Experimentation</div>
+    <div class="cap-meta">Causal &amp; A/B</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot"></span><span class="mdot"></span><span class="mdot"></span><span class="mdot"></span></div>
+    <span class="cell-state">Vibes-based decisions</span>
+    <span class="cell-detail">Product changes shipped to 100%. Founders eyeball metrics.</span>
+    <div class="cell-tools">—</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot"></span><span class="mdot"></span><span class="mdot"></span></div>
+    <span class="cell-state">Feature flags, before/after readouts</span>
+    <span class="cell-detail">Gradual rollouts, but rarely with proper control groups. Effects estimated by inspection.</span>
+    <div class="cell-tools">LaunchDarkly · PostHog (flags) · custom flagging</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot"></span><span class="mdot"></span></div>
+    <span class="cell-state">Formal A/B testing platform with stat rigor</span>
+    <span class="cell-detail">Sample size calculators, sequential testing, guardrail metrics. Required for product-led companies.</span>
+    <div class="cell-tools">Statsig · Eppo · GrowthBook · Optimizely · Amplitude Experiment</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot"></span></div>
+    <span class="cell-state">Causal inference, holdouts, multi-arm bandits, switchback designs</span>
+    <span class="cell-detail">Marketplace + two-sided product needs. Org runs hundreds of concurrent experiments with interference handling.</span>
+    <div class="cell-tools">Internal causal libs · DoWhy · CausalML · in-platform CUPED/variance reduction</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span></div>
+    <span class="cell-state">Experimentation as a platform; thousands of experiments concurrently</span>
+    <span class="cell-detail">Netflix/Airbnb-style: every PM ships through experiments. Custom platforms with full causal toolkits, automated analysis.</span>
+    <div class="cell-tools">Custom (Netflix XP, Airbnb ERF, Uber Morpheus) · automated readouts · LLM-summarized experiment reviews</div>
+  </td>
+</tr>
+
+<tr>
+  <td class="cap">
+    <div class="cap-name">Security, privacy &amp; access</div>
+    <div class="cap-meta">Risk &amp; compliance</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot"></span><span class="mdot"></span><span class="mdot"></span><span class="mdot"></span></div>
+    <span class="cell-state">Shared credentials, no role boundaries</span>
+    <span class="cell-detail">Engineers query prod with personal accounts. Tolerated only pre-product-market-fit.</span>
+    <div class="cell-tools">—</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot"></span><span class="mdot"></span><span class="mdot"></span></div>
+    <span class="cell-state">SSO, role-based access at warehouse level</span>
+    <span class="cell-detail">SOC2 Type I in motion. PII columns identified but not yet enforced. Encryption at rest defaults from cloud.</span>
+    <div class="cell-tools">Okta · Snowflake/BigQuery RBAC · 1Password · Vanta</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot"></span><span class="mdot"></span></div>
+    <span class="cell-state">PII tagging, column masking, audit logging, SOC2 Type II</span>
+    <span class="cell-detail">Sensitive data tagged. Analyst access scoped. First privacy reviews for new pipelines.</span>
+    <div class="cell-tools">Snowflake masking · Immuta · Satori · Drata · Vanta</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot"></span></div>
+    <span class="cell-state">Attribute-based access, regional data residency, DSARs automated</span>
+    <span class="cell-detail">GDPR/CCPA/HIPAA at scale. Privacy engineering team. Automated deletion pipelines for user-data requests.</span>
+    <div class="cell-tools">Immuta · Privacera · OneTrust · Transcend · BigID</div>
+  </td>
+  <td>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span><span class="mdot on"></span></div>
+    <span class="cell-state">Differential privacy, secure enclaves, zero-trust data planes</span>
+    <span class="cell-detail">Apple-style on-device DP, AWS Nitro / GCP Confidential Compute for training on customer data. AI-specific safety teams.</span>
+    <div class="cell-tools">Custom DP libraries · OpenDP · Confidential VMs · in-house policy engines · red-team frameworks</div>
+  </td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<div class="section-head">
+  <div class="num">§ 03</div>
+  <h2>When to introduce each tool</h2>
+  <div class="rule"></div>
+</div>
+<p class="section-intro">
+  The same chart, inverted. Read this as a procurement roadmap: bars start at the stage where the tool first earns its keep, and end where teams typically replace or augment it. Adopting too early is a more common mistake than adopting too late.
+</p>
+
+<div class="timeline-wrap">
+  <div class="timeline-axis">
+    <div class="tick" style="left:10%"></div><div class="tick-label" style="left:10%">Stage 00<br/>Reactive</div>
+    <div class="tick" style="left:30%"></div><div class="tick-label" style="left:30%">Stage 01<br/>Repeatable</div>
+    <div class="tick" style="left:50%"></div><div class="tick-label" style="left:50%">Stage 02<br/>Defined</div>
+    <div class="tick" style="left:70%"></div><div class="tick-label" style="left:70%">Stage 03<br/>Managed</div>
+    <div class="tick" style="left:90%"></div><div class="tick-label" style="left:90%">Stage 04<br/>Optimized</div>
+  </div>
+
+  <div class="timeline-rows" style="margin-top: 50px;">
+
+    <div class="timeline-row">
+      <div class="timeline-label">Warehouse</div>
+      <div class="timeline-bar-track">
+        <div class="timeline-bar essential" style="left: 22%; width: 76%;">BigQuery / Snowflake / Redshift</div>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="timeline-label">ELT ingestion</div>
+      <div class="timeline-bar-track">
+        <div class="timeline-bar essential" style="left: 22%; width: 76%;">Fivetran / Airbyte</div>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="timeline-label">SQL transformation</div>
+      <div class="timeline-bar-track">
+        <div class="timeline-bar essential" style="left: 22%; width: 76%;">dbt</div>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="timeline-label">BI tool</div>
+      <div class="timeline-bar-track">
+        <div class="timeline-bar essential" style="left: 22%; width: 76%;">Metabase → Hex/Mode → Looker/Tableau</div>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="timeline-label">Notebook layer</div>
+      <div class="timeline-bar-track">
+        <div class="timeline-bar recommended" style="left: 32%; width: 66%;">Hex · Deepnote · Databricks notebooks</div>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="timeline-label">Orchestrator</div>
+      <div class="timeline-bar-track">
+        <div class="timeline-bar recommended" style="left: 48%; width: 50%;">Dagster · Airflow · Prefect</div>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="timeline-label">Reverse ETL</div>
+      <div class="timeline-bar-track">
+        <div class="timeline-bar recommended" style="left: 50%; width: 48%;">Hightouch · Census</div>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="timeline-label">Experimentation</div>
+      <div class="timeline-bar-track">
+        <div class="timeline-bar recommended" style="left: 45%; width: 53%;">Statsig · Eppo · GrowthBook</div>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="timeline-label">Data observability</div>
+      <div class="timeline-bar-track">
+        <div class="timeline-bar recommended" style="left: 48%; width: 50%;">Monte Carlo · Bigeye · Elementary</div>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="timeline-label">Data catalog</div>
+      <div class="timeline-bar-track">
+        <div class="timeline-bar scale" style="left: 50%; width: 48%;">Atlan · Secoda · OpenMetadata</div>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="timeline-label">Streaming</div>
+      <div class="timeline-bar-track">
+        <div class="timeline-bar scale" style="left: 52%; width: 46%;">Kafka · Flink · Confluent · Estuary</div>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="timeline-label">Metrics / semantic layer</div>
+      <div class="timeline-bar-track">
+        <div class="timeline-bar scale" style="left: 50%; width: 48%;">Cube · dbt Semantic · LookML</div>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="timeline-label">ML experiment tracking</div>
+      <div class="timeline-bar-track">
+        <div class="timeline-bar recommended" style="left: 42%; width: 56%;">MLflow · Weights &amp; Biases</div>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="timeline-label">LLM eval &amp; observability</div>
+      <div class="timeline-bar-track">
+        <div class="timeline-bar recommended" style="left: 38%; width: 60%;">LangSmith · Braintrust · Langfuse</div>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="timeline-label">Vector store</div>
+      <div class="timeline-bar-track">
+        <div class="timeline-bar recommended" style="left: 40%; width: 58%;">Pinecone · Weaviate · pgvector · Turbopuffer</div>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="timeline-label">Feature store</div>
+      <div class="timeline-bar-track">
+        <div class="timeline-bar scale" style="left: 65%; width: 33%;">Tecton · Feast · Databricks FS</div>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="timeline-label">Lakehouse / Iceberg</div>
+      <div class="timeline-bar-track">
+        <div class="timeline-bar scale" style="left: 60%; width: 38%;">Databricks · Iceberg + Trino · Onehouse</div>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="timeline-label">Access &amp; privacy</div>
+      <div class="timeline-bar-track">
+        <div class="timeline-bar scale" style="left: 60%; width: 38%;">Immuta · Privacera · Satori · OneTrust</div>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="timeline-label">Custom internal platform</div>
+      <div class="timeline-bar-track">
+        <div class="timeline-bar optional" style="left: 78%; width: 20%;">In-house (only at hyperscale)</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="legend">
+    <span><span class="swatch" style="background:var(--accent);"></span>Foundational</span>
+    <span><span class="swatch" style="background:var(--accent-2);"></span>Growth-stage</span>
+    <span><span class="swatch" style="background:var(--accent-4);"></span>Scale-stage</span>
+    <span><span class="swatch" style="background:var(--paper-3); border:1px solid var(--rule);"></span>Hyperscale-only</span>
+  </div>
+</div>
+
+<div class="section-head">
+  <div class="num">§ 04</div>
+  <h2>Three reference archetypes</h2>
+  <div class="rule"></div>
+</div>
+<p class="section-intro">
+  Different operating models call for different center-of-gravity choices. These three archetypes — distilled from how Anthropic/OpenAI, Databricks/Snowflake-style platforms, and Netflix/Uber operate — show that "data maturity" doesn't converge on a single shape.
+</p>
+
+<div class="compare-grid">
+
+  <div class="compare-card">
+    <div class="archetype">Archetype A · Frontier AI lab</div>
+    <h3>The research-led shop</h3>
+    <dl>
+      <dt>Exemplars</dt><dd>OpenAI, Anthropic, Mistral, xAI</dd>
+      <dt>Center of gravity</dt><dd>Pre-training data + RLHF + eval; data <em>is</em> the moat</dd>
+      <dt>Org shape</dt><dd>Research / Pretraining / Post-training / Evals / Infra — analytics &amp; BI are downstream</dd>
+      <dt>Warehouse</dt><dd>Often custom — petabyte object stores feeding training; Snowflake/BigQuery for finance &amp; product analytics only</dd>
+      <dt>ML platform</dt><dd>Mostly in-house; Ray + custom orchestration on GPU/TPU clusters</dd>
+      <dt>Critical capability</dt><dd>Eval infrastructure &amp; data quality at training scale</dd>
+    </dl>
+    <div class="signature">Mature in ML, deliberately spartan in BI. Will look "immature" on analytics tooling because they invested elsewhere.</div>
+  </div>
+
+  <div class="compare-card">
+    <div class="archetype">Archetype B · Data platform vendor</div>
+    <h3>The eat-your-own-dogfood</h3>
+    <dl>
+      <dt>Exemplars</dt><dd>Databricks, Snowflake, Confluent, dbt Labs</dd>
+      <dt>Center of gravity</dt><dd>Own product as the data backbone; reference implementation pressure</dd>
+      <dt>Org shape</dt><dd>Platform team + embedded analytics; mature governance early (customers demand it)</dd>
+      <dt>Warehouse</dt><dd>Their own — Lakehouse / Snowflake. Iceberg/Delta from day one</dd>
+      <dt>ML platform</dt><dd>Mosaic AI / MLflow ecosystem; feature store, model serving, agent eval all native</dd>
+      <dt>Critical capability</dt><dd>Unified governance (Unity Catalog-style) across data + ML + AI</dd>
+    </dl>
+    <div class="signature">Most "complete" on paper. Risk is over-fitting to internal tools; what works at Databricks may be heavy for a 200-person SaaS.</div>
+  </div>
+
+  <div class="compare-card">
+    <div class="archetype">Archetype C · Marketplace / consumer tech</div>
+    <h3>The experiment factory</h3>
+    <dl>
+      <dt>Exemplars</dt><dd>Netflix, Airbnb, Uber, DoorDash, Stripe</dd>
+      <dt>Center of gravity</dt><dd>Experimentation + ML for ranking/pricing/matching, at enormous scale</dd>
+      <dt>Org shape</dt><dd>Federated/mesh from Series C onward; data products owned by domains</dd>
+      <dt>Warehouse</dt><dd>Hybrid lakehouse — Iceberg + Spark + warehouse for serving</dd>
+      <dt>ML platform</dt><dd>Custom (Michelangelo, Zipline, Metaflow); feature stores serving trillions of computations</dd>
+      <dt>Critical capability</dt><dd>Experimentation platform as a first-class product</dd>
+    </dl>
+    <div class="signature">The "data mesh" archetype. Heavy investment in internal platforms only earns out beyond ~$500M revenue.</div>
+  </div>
+
+</div>
+
+<div class="section-head">
+  <div class="num">§ 05</div>
+  <h2>Six operating principles</h2>
+  <div class="rule"></div>
+</div>
+<p class="section-intro">
+  Across all archetypes, six patterns separate teams that compound from those that thrash. Use these as the inputs to your roadmap before locking in tools.
+</p>
+
+<div class="principles">
+
+  <div class="principle">
+    <div class="pnum">i</div>
+    <h4>Maturity is not size</h4>
+    <p>A 200-person AI startup can sit at Stage 03 on ML and Stage 01 on BI simultaneously. Score each capability independently, then prioritize the laggards that block the next business move — not the ones with the loudest tooling pitch.</p>
+  </div>
+
+  <div class="principle">
+    <div class="pnum">ii</div>
+    <h4>Hire ahead of one stage, never two</h4>
+    <p>A Stage 01 org hiring a Head of ML Platform will create a team with no work. A Stage 01 org hiring an Analytics Engineer who can grow into the role will compound. Hire for current + 12 months, not the org chart you imagine in 2028.</p>
+  </div>
+
+  <div class="principle">
+    <div class="pnum">iii</div>
+    <h4>Tools are 5–10% of the cost</h4>
+    <p>Headcount is 5–30× the tooling bill. Optimizing the SaaS line item while underspending on senior data hires is a classic Stage 01 mistake. Buy the boring stack; spend on people who design pipelines you don't have to rebuild.</p>
+  </div>
+
+  <div class="principle">
+    <div class="pnum">iv</div>
+    <h4>Centralize early, federate later</h4>
+    <p>Below ~150 people, a single centralized team enforces consistent definitions faster than embedded analysts ever will. Above ~500 people, that same structure becomes the bottleneck. The handoff window is 150–300 people for most orgs.</p>
+  </div>
+
+  <div class="principle">
+    <div class="pnum">v</div>
+    <h4>Governance is a Stage 02 problem</h4>
+    <p>Buying Collibra at Stage 01 is the data-team equivalent of buying SAP at Series A. The cheap version of governance — dbt tests, a metrics layer, a README — gets you 80% of the value until you have stewards to operate the heavier tools.</p>
+  </div>
+
+  <div class="principle">
+    <div class="pnum">vi</div>
+    <h4>AI doesn't skip the stages</h4>
+    <p>GenAI features shipped before the data foundations exist will degrade the moment usage scales. RAG over messy docs, evals against unverified ground truth, agents over ungoverned tools — all produce confident, wrong answers. Build the floor before the penthouse.</p>
+  </div>
+
+</div>
+
+<footer>
+  <div class="ftop">
+    <div class="mark">Field <em>Guide</em></div>
+    <div class="fmeta">END OF DOCUMENT · § 05 / 05</div>
+  </div>
+  <p class="colophon">
+    Compiled from public engineering blogs (Netflix, Airbnb, Uber, Stripe, Databricks), Bessemer's data team playbook with Solmaz Shahalizadeh, the WWT and Coalesce data maturity frameworks, Erik Bernhardsson's writing on data team structure, and the 2026 modern data stack landscape reviews from Datafold, Valiotti, and Alation. Treat the matrix as a starting orientation, not a prescription — every real org bends the columns to its own physics.
+  </p>
+</footer>
+
+</body>
+</html>
